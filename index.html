@@ -370,6 +370,30 @@
         color: #666;
         font-style: italic;
       }
+      
+.search-item {
+    margin-left: 20px;
+  }
+  
+  #search-form {
+    display: flex;
+  }
+  
+  #search-input {
+    padding: 8px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    width: 200px;
+  }
+  
+  #search-form button {
+    background: #f39c12;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    padding: 0 12px;
+    cursor: pointer;
+    color: white;
+  }
 
       /* Founder Section */
       .founder {
@@ -538,7 +562,9 @@
           padding: 20px;
           box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
-
+.search-item {
+      margin: 10px auto;
+    }
         nav ul.show {
           display: flex;
         }
@@ -590,19 +616,26 @@
           <img src="lafun-logo.jpg" alt="Lavun Logo" />
           <h1>NALLGOS</h1>
         </div>
-        <nav>
-          <div class="mobile-menu">☰</div>
-          <ul id="nav-menu">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#structures">Structures</a></li>
-            <li><a href="#personalities">Personalities</a></li>
-            <li><a href="#resources">Resources</a></li>
-            <li><a href="#traditions">Traditions</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#stakeholders">Stakeholders</a></li>
-            <li><a href="CHAT.html">📚✉🧮 CHAT FORUM</a></li>
-          </ul>
-        </nav>
+       <nav>
+  <div class="mobile-menu">☰</div>
+  <ul id="nav-menu">
+    <li><a href="#home">Home</a></li>
+    <li><a href="images.html">Structures</a></li>
+    <li><a href="#personalities">Personalities</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#traditions">Traditions</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#stakeholders">Stakeholders</a></li>
+    <li><a href="https://www.brooksfreelibrary.org/elibrary/" class="elibrary">📚 E-Library</a></li>
+    <li><a href="CHAT.html">📚✉🧮 CHAT FORUM</a></li>
+    <li class="search-item">
+      <form id="search-form" onsubmit="return performSearch()">
+        <input type="text" id="search-input" placeholder="Search...">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </li>
+  </ul>
+</nav>
       </div>
     </header>
 
@@ -664,8 +697,8 @@
           <div class="gallery-item">
             <img src="TOWN HALL.jpg" alt="Town Hall" />
             <div class="gallery-caption">
-              <h3>Lavun Town Hall</h3>
-              <p>Venue for important community gatherings</p>
+              <h3>Conference Room</h3>
+              <p>Venue for legislative gatherings</p>
             </div>
           </div>
           <div class="gallery-item">
@@ -700,40 +733,44 @@
           <div class="team-member">
             <div class="team-img">
               <img
-                src="Lavun-personality1.jpg"
+                src="chairman.jpeg"
                 alt="Local Government Chairman"
               />
             </div>
             <div class="team-info">
-              <h3>Hon. Abdullahi Bello</h3>
-              <p>Chairman, Lavun Local Government</p>
+              <h3>Hon Mohammad Isah kutigi,
+</h3>
+              <p>Executive Council chairman.
+Lavun Local Government, Niger State</p>
             </div>
           </div>
           <div class="team-member">
             <div class="team-img">
-              <img src="Lavun-personality2.jpg" alt="Traditional Ruler" />
+              <img src="emir.jpeg" alt="Traditional Ruler" />
             </div>
             <div class="team-info">
-              <h3>HRH Alhaji Ibrahim Musa</h3>
+              <h3>HRH, Alhaji Mohammad Ibrahim Kudu</BR>
+Ezanuwan of kutigi kingdom.</h3>
               <p>Emir of Lavun</p>
             </div>
           </div>
           <div class="team-member">
             <div class="team-img">
-              <img src="Lavun-personality3.jpg" alt="Education Secretary" />
+              <img src="REPS.jpg" alt="Education Secretary" />
             </div>
             <div class="team-info">
-              <h3>Dr. Amina Yusuf</h3>
-              <p>Education Secretary, Lavun LGA</p>
+              <h3>Dr. Joshua Audugana</h3>
+              <p>House rep,
+Lavun, edati, mokwa,</p>
             </div>
           </div>
           <div class="team-member">
             <div class="team-img">
-              <img src="Lavun-personality4.jpg" alt="Business Leader" />
+              <img src="leader.jpg" alt="Business Leader" />
             </div>
             <div class="team-info">
-              <h3>Alhaji Mohammed Kabir</h3>
-              <p>President, Lavun Chamber of Commerce</p>
+              <h3>Hon Ahmed Nkochi,</h3>
+              <p>Leader, councillor forum. Lavun Local Government</p>
             </div>
           </div>
         </div>
@@ -999,21 +1036,165 @@
             </p>
             <h3>Wards in Lavun LGA</h3>
             <p>
-              Lavun Local Government Area is divided into 10 administrative
-              wards:
+              LAVUN LOCAL GOVERNMENT COMPRISES OF TWELVE (12) POLITICAL WARDS.
+              NAMELY
             </p>
             <ul>
-              <li>Lavun Central Ward</li>
-              <li>Garin Maigari Ward</li>
-              <li>Rijau Ward</li>
-              <li>Tungan Magajiya Ward</li>
-              <li>Kukoki Ward</li>
-              <li>Kanya Ward</li>
-              <li>Dugge Ward</li>
-              <li>Kaffin Koro Ward</li>
-              <li>Kambu Ward</li>
-              <li>Kwakwashi Ward</li>
+              <li>1) KUTIGI WARD</li>
+              <li>2) DOKO WARD</li>
+              <li>3) GABA WARD</li>
+              <li>4) BATATI WARD</li>
+              <li>5) DABBAN WARD</li>
+              <li>6) JIMA WARD</li>
+              <li>7) KUSOTACHIN WARD</li>
+              <li>8) MAMBE WARD</li>
+              <li>9) LAGUN WARD</li>
+              <li>10) DASSUN WARD</li>
+              <li>11) EGBAKO WARD</li>
+              <li>12) BUSU WARD.</li>
             </ul>
+          </div>
+          <div class="about-text">
+            <h3>
+              PROSPECTS AND CHALLENGES OF JIMA WARD OF LAVUN LOCAL GOVERNMENT
+              AREAS OF NIGER STATE. NIGERIA.
+            </h3>
+            <p>
+              THERE ARE TWENTY NINE (29) COMMUNITIES IN JIMA WARD. THE PEOPLE OF
+              JIMA WARD ARE PREDOMINANTLY FARMERS AND SMALL SCALE BUSINESSES AND
+              ARE SKILLFUL. THE WARD LACKS COMPLETE ACCESS TO BASIC SOCIAL
+              AMENITIES/SERVICES. THE PEOPLE ARE UNITED, PEACE LOVING AND
+              CARING. GOVERNMENT AT ALL LEVELS ARE NOT PAYING ATTENTION TO THE
+              HUMAN, SOCIAL AND ECONOMIC GROWTH AND DEVELOPMENT AS WELL AS
+              WELL-BEING OF THE WARD. THE WARD IS GROSSLY UNDER REPRESENTED IN
+              ALL RAMIFICATIONS. BOTH SOCIALLY AND POLITICALLY.
+            </p>
+            <p></p>
+            <div class="polling-units">
+              <h3>WE HAVE FIFTEEN (15) POLLING UNITS IN JIMA WARD.</h3>
+              <ul>
+                <li>(1) KPACHITAGI PU CODE: 26/13/08/008.</li>
+                <li>(2) DUKUGI PRIMARY SCHOOL PU CODE: 26/13/08/012.</li>
+                <li>(3) GOGA PU CODE: 26/13/08/007.</li>
+                <li>(4) LANGBATA OPEN SPACE PU CODE: 26/13/08/014.</li>
+                <li>(5) EDOBABA PU CODE: 26/13/08/002.</li>
+                <li>(6) ZHIGICI PU CODE: 26/13/08/006.</li>
+                <li>(7) DANCHITAGI MARKET PU CODE: 26/13/08/011.</li>
+                <li>(8) LANCHIKAGI PU CODE: 26/13/08/004.</li>
+                <li>(9) YAFU PU CODE: 26/13/08/009.</li>
+                <li>(10) GOVERNMENT SECONDARY SCHOOL PU CODE: 26/13/08/015.</li>
+                <li>(11) JIMA PU CODE: 26/13/08/001.</li>
+                <li>(12) DANCHITAGI PU CODE: 26/13/08/003.</li>
+                <li>
+                  (13) KPACHITAGI HEALTH CARE CENTER PU CODE: 26/13/08/013.
+                </li>
+                <li>(14) EMI-TSADU PU CODE: 26/13/08/010.</li>
+                <li>(15) KUDOGI PU CODE: 26/13/08/005.</li>
+              </ul>
+              <p>TOTAL POLLING UNITS = 15.</p>
+            </div>
+            <h3>PRIMARY SCHOOLS IN JIMA WARD:</h3>
+            <ol>
+              <li>JIMA PRIMARY SCHOOL.</li>
+              <li>YAFU PRIMARY SCHOOL.</li>
+              <li>EDOGI PRIMARY SCHOOL.</li>
+              <li>TUMAKA PRIMARY SCHOOL.</li>
+              <li>BANTIGI PRIMARY SCHOOL.</li>
+              <li>EDOBABA PRIMARY SCHOOL.</li>
+              <li>DANCHITAGI PRIMARY SCHOOL.</li>
+              <li>KUDOGI PRIMARY SCHOOL.</li>
+              <li>DUKUGI PRIMARY SCHOOL.</li>
+              <li>LANCHIKAGI PRIMARY SCHOOL.</li>
+              <li>KPACHITAGI SOKYARIA PRIMARY SCHOOL.</li>
+              <li>GOGA PRIMARY SCHOOL.</li>
+              <li>BUKARI PRIMARY SCHOOL.</li>
+              <li>KUSOGI PRIMARY SCHOOL.</li>
+            </ol>
+            <p class="total">TOTAL PRIMARY SCHOOLS = 14.</p>
+
+            <h3>SECONDARY SCHOOLS IN JIMA WARD:</h3>
+            <ol>
+              <li>JIMA SECONDARY SCHOOL.</li>
+              <li>KPACHITAGI JUNIOR SECONDARY SCHOOL.</li>
+              <li>DANCHITAGI JUNIOR SECONDARY SCHOOL.</li>
+            </ol>
+            <p class="total">TOTAL SECONDARY SCHOOLS = 03.</p>
+
+            <h2>VILLAGE HEADS</h2>
+            <p>THERE ARE FIVE VILLAGE HEADS IN JIMA WARD.</p>
+            <ol>
+              <li>ETSUYANKPA JIMA, BARR. MUHAMMAD NMA TSADU.</li>
+              <li>ETSUYANKPA BANTIGI, ALH. MUHAMMAD MUSA.</li>
+              <li>ETSUYANKPA EDOBABA, ALH. ABUBAKAR MUHAMMAD.</li>
+              <li>ETSUYANKPA DANCHITAGI, ALH. MUHAMMAD BABA.</li>
+              <li>ETSUYANKPA KPACHITAGI, ALH. MUHAMMAD ESOZHI.</li>
+            </ol>
+
+            <h2>CHALLENGES IN JIMA WARD</h2>
+            <ol>
+              <li>
+                ALMOST ALL THE PRIMARY SCHOOLS IN JIMA WARD ARE COLLAPSED AND
+                NEED RECONSTRUCTION.
+              </li>
+              <li>OUR FARMERS NEED FERTILIZERS, CHEMICALS AND FARM INPUTS.</li>
+              <li>WE NEED SKILL ACQUISITION CENTRES.</li>
+              <li>WE NEED AT LEAST A MICRO FINANCE BANK.</li>
+              <li>WE NEED A GENERAL HOSPITAL.</li>
+              <li>WE NEED ELECTRICITY IN OUR COMMUNITIES.</li>
+              <li>WE NEED PORTABLE WATER SUPPLY IN OUR COMMUNITIES.</li>
+            </ol>
+            <p>
+              OUR EXPECTATIONS WITH GOVERNMENT IS THAT, THEY SHOULD PROVIDE US
+              WITH THE BASIC SOCIAL SERVICES.
+            </p>
+
+            <h2>HEALTH CARE CENTERS</h2>
+            <p>WE HAVE FOUR (4) PRIMARY HEALTH CARE CENTERS AND THEY ARE:</p>
+            <ol>
+              <li>JIMA PRIMARY HEALTH CARE CENTER.</li>
+              <li>EDOBABA PRIMARY HEALTH CARE CENTER.</li>
+              <li>DANCHITAGI PRIMARY HEALTH CARE.</li>
+              <li>KPACHITAGI PRIMARY HEALTH CARE CENTER.</li>
+            </ol>
+
+            <h2>MARKETS</h2>
+            <p>WE HAVE THREE (3) MARKETS IN JIMA WARD AND THEY ARE:</p>
+            <ol>
+              <li>JIMA MARKET.</li>
+              <li>LANGBATA MARKET.</li>
+              <li>DANCHITAGI MARKET.</li>
+            </ol>
+
+            <h2>ECONOMIC ACTIVITIES</h2>
+            <p>
+              OUR MAJOR SOURCES OF INCOME IN JIMA WARD ARE FARMING AND SMALL
+              SCALE BUSINESSES.
+            </p>
+            <p>THERE ARE NO ANY GOVERNMENT INTERVENTION IN JIMA WARD.</p>
+
+            <h2>CULTURAL INFORMATION</h2>
+            <ul>
+              <li>OUR RELIGION IS PURELY ISLAM.</li>
+              <li>OUR TRIBE IS PURELY NUPE.</li>
+              <li>OUR ANNUAL FESTIVALS ARE SALLAH AND BARIKI.</li>
+              <li>
+                WE HAVE FOURTEEN (14) CENTRAL MOSQUES (JUMUAH FRIDAY MOSQUES).
+              </li>
+            </ul>
+
+            <h2>NATURAL RESOURCES</h2>
+            <p>
+              WE HAVE LIMESTONE (KANWAN) AND KAOLIN (BULIA) AS MINERAL
+              RESOURCES.
+            </p>
+
+            <h2>YOUTH ORGANIZATION</h2>
+            <p>
+              WE HAVE JIMA WARD YOUTH CONGRESS (J.W.Y.C) AS THE PRESSURE GROUP.
+            </p>
+
+            <h2>COMMUNITIES</h2>
+            <p>WE HAVE TWENTY NINE (29) COMMUNITIES IN JIMA WARD.</p>
           </div>
           <div class="about-img">
             <img src="map.jpg" alt="Map of Lavun LGA" />
@@ -1364,6 +1545,23 @@
           modal.style.display = "none";
         }
       });
+ 
+  // Search function
+  function performSearch() {
+    const query = document.getElementById('search-input').value.trim();
+    if (query) {
+      window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
+    }
+    return false;
+  }
+  
+  // Add keyboard shortcut (Ctrl+K or Cmd+K) for search
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      document.getElementById('search-input').focus();
+    }
+  });
     </script>
   </body>
 </html>
