@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lavun Local Government - Wards Overview</title>
+    <style>
+      :root {
+        --primary-color: #1a5276;
+        --secondary-color: #d4ac0d;
+        --accent-color: #922b21;
+        --light-color: #f8f9fa;
+        --dark-color: #212529;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        background-color: #f5f5f5;
+        line-height: 1.6;
+      }
+
+      header {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("lavun-banner.jpg");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+        padding: 4rem 1rem;
+        position: relative;
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--secondary-color);
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+
+      .wards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin: 3rem 0;
+      }
+
+      .ward-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+
+      .ward-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .ward-image {
+        height: 180px;
+        background-color: #ddd;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .ward-info {
+        padding: 1.5rem;
+      }
+
+      .ward-info h3 {
+        margin-top: 0;
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--secondary-color);
+        padding-bottom: 0.5rem;
+        display: inline-block;
+      }
+
+      .ward-info p {
+        color: #666;
+        margin-bottom: 1rem;
+      }
+
+      .ward-section {
+        padding: 4rem 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .ward-section h2 {
+        color: var(--primary-color);
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        position: relative;
+      }
+
+      .ward-section h2::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: var(--secondary-color);
+        margin: 0.5rem auto;
+      }
+
+      .ward-content {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .ward-content {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .ward-details {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .ward-details h3 {
+        color: var(--accent-color);
+        margin-top: 1.5rem;
+      }
+
+      .ward-details ul {
+        padding-left: 1.5rem;
+      }
+
+      .ward-details li {
+        margin-bottom: 0.5rem;
+      }
+
+      .image-gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .gallery-item {
+        height: 150px;
+        background-color: #eee;
+        background-size: cover;
+        background-position: center;
+        border-radius: 4px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .gallery-item::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.2);
+        transition: background 0.3s ease;
+      }
+
+      .gallery-item:hover::after {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      footer {
+        background-color: var(--dark-color);
+        color: white;
+        text-align: center;
+        padding: 2rem 1rem;
+        margin-top: 3rem;
+      }
+
+      .back-to-top {
+        display: inline-block;
+        background-color: var(--secondary-color);
+        color: var(--dark-color);
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .back-to-top:hover {
+        background-color: #e8b10d;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .wards-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .image-gallery {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <h1>Lavun Local Government Area</h1>
+        <p class="subtitle">
+          Explore the twelve political wards that make up Lavun LGA in Niger
+          State, Nigeria
+        </p>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="wards-overview">
+        <h2>The Twelve Wards of Lavun LGA</h2>
+        <div class="wards-grid">
+          <!-- Ward Cards -->
+          <div class="ward-card" onclick="location.href='#kutigi-ward'">
+            <div
+              class="ward-image"
+              style="background-image: url('kutigi-thumb.jpg')"
+            ></div>
+            <div class="ward-info">
+              <h3>Kutigi Ward</h3>
+              <p>
+                Administrative headquarters of Lavun LGA with rich cultural
+                heritage
+              </p>
+            </div>
+          </div>
+
+          <div class="ward-card" onclick="location.href='#doko-ward'">
+            <div
+              class="ward-image"
+              style="background-image: url('doko-thumb.jpg')"
+            ></div>
+            <div class="ward-info">
+              <h3>Doko Ward</h3>
+              <p>
+                Known for its unique political organization and agricultural
+                activities
+              </p>
+            </div>
+          </div>
+
+          <div class="ward-card" onclick="location.href='#gaba-ward'">
+            <div
+              class="ward-image"
+              style="background-image: url('gaba-thumb.jpg')"
+            ></div>
+            <div class="ward-info">
+              <h3>Gaba Ward</h3>
+              <p>Details coming soon...</p>
+            </div>
+          </div>
+
+          <div class="ward-card" onclick="location.href='#batati-ward'">
+            <div
+              class="ward-image"
+              style="background-image: url('batati-thumb.jpg')"
+            ></div>
+            <div class="ward-info">
+              <h3>Batati Ward</h3>
+              <p>
+                17 units with multiple healthcare centers and primary schools
+              </p>
+            </div>
+          </div>
+
+          <div class="ward-card" onclick="location.href='#dabban-ward'">
+            <div
+              class="ward-image"
+              style="background-image: url('dabban-thumb.jpg')"
+            ></div>
+            <div class="ward-info">
+              <h3>Dabban Ward</h3>
+              <p>Details coming soon...</p>
+            </div>
+          </div>
+
+          <div class="ward-card" onclick="location.href='#jima-ward'">
+            <div
+              class="ward-image"
+              style="background-image: url('jima-thumb.jpg')"
+            ></div>
+            <div class="ward-info">
+              <h3>Jima Ward</h3>
+              <p>
+                29 communities with 14 primary schools and 3 secondary schools
+              </p>
+            </div>
+          </div>
+
+          <div class="ward-card" onclick="location.href='#kusotachin-ward'">
+            <div
+              class="ward-image"
+              style="background-image: url('kusotachin-thumb.jpg')"
+            ></div>
+            <div class="ward-info">
+              <h3>Kusotachin Ward</h3>
+              <p>Details coming soon...</p>
+            </div>
+          </div>
+
+          <div class="ward-card" onclick="location.href='#mambe-ward'">
+            <div
+              class="ward-image"
+              style="background-image: url('mambe-thumb.jpg')"
+            ></div>
+            <div class="ward-info">
+              <h3>Mambe Ward</h3>
+              <p>Details coming soon...</p>
+            </div>
+          </div>
+
+          <div class="ward-card" onclick="location.href='#lagun-ward'">
+            <div
+              class="ward-image"
+              style="background-image: url('lagun-thumb.jpg')"
+            ></div>
+            <div class="ward-info">
+              <h3>Lagun Ward</h3>
+              <p>Details coming soon...</p>
+            </div>
+          </div>
+
+          <div class="ward-card" onclick="location.href='#dassun-ward'">
+            <div
+              class="ward-image"
+              style="background-image: url('dassun-thumb.jpg')"
+            ></div>
+            <div class="ward-info">
+              <h3>Dassun Ward</h3>
+              <p>
+                22 villages with 15 polling units and strong educational
+                institutions
+              </p>
+            </div>
+          </div>
+
+          <div class="ward-card" onclick="location.href='#egbako-ward'">
+            <div
+              class="ward-image"
+              style="background-image: url('egbako-thumb.jpg')"
+            ></div>
+            <div class="ward-info">
+              <h3>Egbako Ward</h3>
+              <p>Rich in natural resources with over 10 languages spoken</p>
+            </div>
+          </div>
+
+          <div class="ward-card" onclick="location.href='#busu-ward'">
+            <div
+              class="ward-image"
+              style="background-image: url('busu-thumb.jpg')"
+            ></div>
+            <div class="ward-info">
+              <h3>Busu/Kuchi Ward</h3>
+              <p>97 communities with 10 primary healthcare facilities</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ward Sections -->
+      <section id="batati-ward" class="ward-section">
+        <h2>Batati Ward</h2>
+        <div class="ward-content">
+          <div class="ward-details">
+            <h3>Units in Batati Ward</h3>
+            <ol>
+              <li>Batati primary school unit</li>
+              <li>Maali primary school unit</li>
+              <li>Maali health care center unit</li>
+              <li>Chatafu unit</li>
+              <li>Gbarigi unit (swalagi & dapan village)</li>
+              <li>Dikko dabban unit (konkkolugi village)</li>
+              <li>Satifu unit (sabafu)</li>
+              <li>Shabafu unit (kokogi village)</li>
+              <li>Gbangbagi unit</li>
+              <li>Lanle primary school unit</li>
+              <li>Lanle health care center unit</li>
+              <li>Etsuworo unit</li>
+              <li>Shaku unit</li>
+              <li>Panti woro unit (intachigi village)</li>
+              <li>Panti gbako unit (dikko ndamanan village)</li>
+              <li>Kunniawo unit (dassagi village)</li>
+              <li>Shebe gbako unit (shebe ekpa village)</li>
+            </ol>
+
+            <h3>Healthcare Centers</h3>
+            <ul>
+              <li>Batati health care center</li>
+              <li>Maali health care center</li>
+              <li>Chatafu health care center</li>
+              <li>Dikko dabban health care center</li>
+              <li>Etsuworo health care center</li>
+              <li>Lanle health care center</li>
+              <li>Shebe gbako health care center</li>
+            </ul>
+
+            <h3>Primary Schools</h3>
+            <ul>
+              <li>Batati primary school</li>
+              <li>Maali primary school</li>
+              <li>Chatafu primary school</li>
+              <li>Dikko dabban primary school</li>
+              <li>Konkkolugi primary school</li>
+              <li>Shabafu primary school</li>
+              <li>Satifu primary school</li>
+              <li>Gbangbagi primary school</li>
+              <li>Sokera primary school</li>
+              <li>Lanle primary school</li>
+              <li>Etsuworo primary school</li>
+              <li>Shaku primary school</li>
+              <li>Panti gbako primary school</li>
+              <li>Shebe gbako primary school</li>
+              <li>Swalagi primary school</li>
+            </ul>
+
+            <h3>District Heads (Etsuyakpa's)</h3>
+            <ul>
+              <li>
+                Mohammed isah batati (yasaba) - Batati district head (Batati,
+                gbangbagi, sonkera shabafu)
+              </li>
+              <li>
+                Alh. Salihu tukuru maali - District head maali (maali, dikko
+                dabban konkkolugi and swalagi)
+              </li>
+              <li>
+                Mohammed kudu - Gbarigi district head (gbarigi, dapan and
+                ekowodu)
+              </li>
+              <li>
+                Mohammed babadoko chatafu - District head chatafu (chatafu,
+                satifu and kokogi)
+              </li>
+              <li>
+                Mall Yusuf panti (yayusuf) - district head panti (panti woro,
+                panti gbako, etsuworo, shaku, intachigi, lenfa and dikko
+                ndamanan)
+              </li>
+              <li>
+                Aliyu uthman (yakutigi) - district head lenle (lenle kunniawo
+                and dassagi)
+              </li>
+              <li>
+                Ahmed cheche shebe - Shebe district head (shebe gbako, shebe
+                woro, emidawu, tswata, and etsu duku)
+              </li>
+            </ul>
+          </div>
+
+          <div class="image-gallery">
+            <div
+              class="gallery-item"
+              style="background-image: url('batati1.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('batati2.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('batati3.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('batati4.jpg')"
+            ></div>
+          </div>
+        </div>
+        <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
+      </section>
+
+      <section id="jima-ward" class="ward-section">
+        <h2>Jima Ward</h2>
+        <div class="ward-content">
+          <div class="ward-details">
+            <h3>Village Heads (Etsuyankpas)</h3>
+            <ul>
+              <li>Village Head of Jima, Barr. Alh. Muhammadu Nma Tsadu</li>
+              <li>Village Head of Bantigi, Alh. Musa Muhammad</li>
+              <li>Village Head of Edobaba, Alh. Abubakar Muhammad</li>
+              <li>Village Head of Danchitagi, Alh. Muhammadu Baba</li>
+              <li>Village Head of Kpachitachi, Alh. Muhammad Esoshi</li>
+            </ul>
+
+            <h3>Education</h3>
+            <p>
+              Jima Ward has 14 primary schools and two secondary schools (one
+              junior and one senior).
+            </p>
+
+            <h3>Healthcare</h3>
+            <p>Jima Ward has 4 health care centres.</p>
+
+            <h3>Economy</h3>
+            <p>Farming and business are our major sources of earnings.</p>
+
+            <h3>Tradition</h3>
+            <p>Nupe</p>
+
+            <h3>Mineral Sources</h3>
+            <p>Lime stone, kaolin and others.</p>
+
+            <h3>Councillor</h3>
+            <p>Hon. Usman Ndakotso</p>
+
+            <h3>Polling Units (15 total)</h3>
+            <ol>
+              <li>Kpachitagi PU Code: 26/13/08/008</li>
+              <li>Dukugi Primary School PU Code: 26/13/08/012</li>
+              <li>Goga PU Code: 26/13/08/007</li>
+              <li>Langbata Open Space PU Code: 26/13/08/014</li>
+              <li>Edobaba PU Code: 26/13/08/002</li>
+              <li>Zhigici PU Code: 26/13/08/006</li>
+              <li>Danchitagi Market PU Code: 26/13/08/011</li>
+              <li>Lanchikagi PU Code: 26/13/08/004</li>
+              <li>Yafu PU Code: 26/13/08/009</li>
+              <li>Government Secondary School PU Code: 26/13/08/015</li>
+              <li>Jima PU Code 26/13/08/001</li>
+              <li>Danchitagi PU Code 26/13/08/003</li>
+              <li>Kpachitagi Health Care Center PU Code 26/13/08/013</li>
+              <li>Emi-tsadu PU Code: 26/13/08/010</li>
+              <li>Kudogi PU Code: 26/13/08/005</li>
+            </ol>
+
+            <h3>Primary Schools (14 total)</h3>
+            <ul>
+              <li>Jima Primary School</li>
+              <li>Yafu Primary School</li>
+              <li>Edogi Primary School</li>
+              <li>Tumaka Primary School</li>
+              <li>Bantigi Primary School</li>
+              <li>Edobaba Primary School</li>
+              <li>Danchitagi Primary School</li>
+              <li>Kudogi Primary School</li>
+              <li>Dukugi Primary School</li>
+              <li>Lanchikagi Primary School</li>
+              <li>Kpachitagi Sokyarja Primary School</li>
+              <li>Goga Primary School</li>
+              <li>Bukari Primary School</li>
+              <li>Kusogi Primary School</li>
+            </ul>
+
+            <h3>Secondary Schools (3 total)</h3>
+            <ul>
+              <li>Jima Secondary School</li>
+              <li>Kpachitagi Junior Secondary School</li>
+              <li>Danchitagi Junior Secondary School</li>
+            </ul>
+
+            <h3>Markets</h3>
+            <ul>
+              <li>Jima Market</li>
+              <li>Langbata Market</li>
+              <li>Danchitagi Market</li>
+            </ul>
+
+            <h3>Primary Health Care Centers</h3>
+            <ul>
+              <li>Jima Primary Health Care Center</li>
+              <li>Edobaba Primary Health Care Center</li>
+              <li>Danchitagi Primary Health Care</li>
+              <li>Kpachitagi Primary Health Care Center</li>
+            </ul>
+
+            <h3>Challenges</h3>
+            <ol>
+              <li>
+                Almost all the primary schools in Jima Ward are collapsed and
+                need reconstruction
+              </li>
+              <li>Our farmers need fertilizers, chemicals and farm inputs</li>
+              <li>We need skill acquisition centres</li>
+              <li>We need at least a micro finance bank</li>
+              <li>We need a general hospital</li>
+              <li>We need electricity in our communities</li>
+              <li>We need portable water supply in our communities</li>
+            </ol>
+          </div>
+
+          <div class="image-gallery">
+            <div
+              class="gallery-item"
+              style="background-image: url('jima1.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('jima2.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('jima3.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('jima4.jpg')"
+            ></div>
+          </div>
+        </div>
+        <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
+      </section>
+
+      <section id="busu-ward" class="ward-section">
+        <h2>Busu/Kuchi Ward</h2>
+        <div class="ward-content">
+          <div class="ward-details">
+            <h3>Communities</h3>
+            <p>Busu/Kuchi Ward has 97 communities</p>
+
+            <h3>Primary Health Care & Post Facilities (10 total)</h3>
+            <ol>
+              <li>PHC Gbadagba Dzuru</li>
+              <li>PHC Kuchi</li>
+              <li>PHC Emitsu Ndadau</li>
+              <li>PHC Busu</li>
+              <li>PHC Lagun</li>
+              <li>Health Post Kpanje</li>
+              <li>PHC Dokogi</li>
+              <li>Health Post Jikanagi</li>
+              <li>PHC Koso</li>
+              <li>PHC Etsu Zagi</li>
+            </ol>
+
+            <h3>Primary Schools</h3>
+            <ul>
+              <li>Jikanagi Primary School</li>
+              <li>Dogo Primary School</li>
+              <li>Koso Primary School</li>
+              <li>Adoga Primary School</li>
+              <li>Kuso Ndalegbo Primary School</li>
+              <li>Kupafu Primary School</li>
+              <li>Lagun Primary School</li>
+              <li>Kuchi Woro Primary School</li>
+              <li>Kuchi Gbako Primary School</li>
+              <li>Gbanchitako Primary School</li>
+              <li>Rokota Primary School</li>
+              <li>Ekota Primary School</li>
+              <li>Gbade Primary School</li>
+            </ul>
+
+            <h3>Villages with Village Heads</h3>
+            <ul>
+              <li>Dogo Village</li>
+              <li>Busu Village</li>
+              <li>Takpa Village</li>
+              <li>Lonchitagi Village</li>
+              <li>Lagun Village</li>
+              <li>Ekoagi Village</li>
+              <li>Kpatagi Village</li>
+              <li>Koso Village</li>
+              <li>Babah Village</li>
+              <li>Kuchi Woro Village</li>
+              <li>Kuchi Gbako Village</li>
+            </ul>
+
+            <h3>Villages without Primary Schools and Village Heads</h3>
+            <ul>
+              <li>Takpa Village</li>
+              <li>Lonchitagi Village</li>
+              <li>Dogo Village</li>
+              <li>Lemuta Village</li>
+              <li>Ekin Village</li>
+              <li>Emi Tete Village</li>
+              <li>Pati Nda Village</li>
+              <li>Ekosa Masa Village</li>
+              <li>Patishin Village</li>
+              <li>Pati Bokungi Village</li>
+              <li>Emi Cheche Village</li>
+              <li>Gongagi Village</li>
+              <li>Gbadagbadzu Village</li>
+              <li>Ekpagi Village</li>
+            </ul>
+
+            <h3>Secondary Schools</h3>
+            <ul>
+              <li>Day Secondary School Busu</li>
+              <li>Junior Secondary School Kuchi</li>
+            </ul>
+
+            <h3>Polling Units (24 total)</h3>
+            <ol>
+              <li>Angbasa</li>
+              <li>Gbanchitako</li>
+              <li>Kupafu</li>
+              <li>Kuchi Gbako</li>
+              <li>Kuchi Woro Tifin</li>
+              <li>Kuchi Woro Tako</li>
+              <li>Gbadagba Dzuru</li>
+              <li>Kpanje</li>
+              <li>Jikanagi</li>
+              <li>Etsu Zagi</li>
+              <li>Dokogi</li>
+              <li>Takpa</li>
+              <li>Bokangi</li>
+              <li>Twaki</li>
+              <li>Busu Tifin</li>
+              <li>Busu Tako</li>
+              <li>Koso</li>
+              <li>Zakari</li>
+              <li>Rural Hospital Busu</li>
+              <li>Village Square Gogogi</li>
+              <li>Lagun</li>
+              <li>Babbah</li>
+              <li>Village Square Koso</li>
+              <li>Kuso Ndalegbo</li>
+            </ol>
+          </div>
+
+          <div class="image-gallery">
+            <div
+              class="gallery-item"
+              style="background-image: url('busu1.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('busu2.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('busu3.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('busu4.jpg')"
+            ></div>
+          </div>
+        </div>
+        <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
+      </section>
+
+      <section id="kutigi-ward" class="ward-section">
+        <h2>Kutigi Ward</h2>
+        <div class="ward-content">
+          <div class="ward-details">
+            <h3>Overview</h3>
+            <p>
+              Kutigi is the administrative headquarter of Lavun Local Government
+              Area of Niger State. It is a quiet but fast growing town. The
+              people speak Nupe as their major language but non Nupe indigenes
+              settle in the town for business and farming activities.
+            </p>
+
+            <p>
+              Though it is under the domain of Etsu Nupe, the town still enjoys
+              the rulership of traditional chiefs who are accountable to the
+              Etsu Nupe. The occupation of the people includes farming, fishing,
+              and trading.
+            </p>
+
+            <h3>History</h3>
+            <p>
+              Historically, the people of kutigi originated from Kukawa which is
+              in the present Borno State. As nomadic farmers in search of good
+              pasture for their animals, they left Kukawa under the leadership
+              of Maina Abubakar the Zanna of Kukawa during the reign of Mai Ali
+              Ibn Haj Dunama of Ngazargamu (1750-1791). Maina Abubakar and his
+              group arrived at the present day Kutigi during the reign of Etsu
+              Mu'azu of Jima (1759-1969).
+            </p>
+
+            <p>
+              Oral evidence stated that when the migrants arrived at the present
+              day Kutigi, they met a hunter Ndayasa and his wife Nnadakun. Their
+              arrival was reported to the Etsu Mu'azu at Jima who later sent a
+              messenger, Gabi Saidu, to Maina Abubakar to know their mission. He
+              told the messenger that he and his people intended to stay in
+              Kutigi for a while as nomads. He sent some gifts (mats, dates and
+              potash) to Etsu Mu'azu of Jima.
+            </p>
+
+            <p>
+              The Etsu in return, granted Maina Abubakar and his people
+              permission to stay at Kutigi in peace. It is worthy to note that
+              some few years before Maina Abubakar's arrival in Kutugi; Estu
+              Jibrilu who ruled between 1746 and 1759 was banished from Jima to
+              Kutigi where he died.
+            </p>
+
+            <h3>Gani Cultural Festival</h3>
+            <p>
+              Gani Cultural Festival is an annual festival which is celebrated
+              by the indigenes of Kutigi and its environs in the Islamic month
+              of Rabiul Awwal to mark the birth of the Holy Prophet Muhammad
+              (SAW). It attracts people from all parts of the country and even
+              beyond during its celebration.
+            </p>
+
+            <p>
+              It originated from the Kanuris. This is to say that the festival
+              is as old as Kutigi itself. This year's Gani festival which was
+              celebrated from February 2-4, 2015, marks the six hundred and
+              seventy three (673), Kutigi Annual Gani Cultural Festival. It is
+              usually celebrated within three days. It starts on the eve of
+              Kutigi's market day.
+            </p>
+          </div>
+
+          <div class="image-gallery">
+            <div
+              class="gallery-item"
+              style="background-image: url('kutigi1.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('kutigi2.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('kutigi3.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('kutigi4.jpg')"
+            ></div>
+          </div>
+        </div>
+        <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
+      </section>
+
+      <section id="dassun-ward" class="ward-section">
+        <h2>Dassun Ward</h2>
+        <div class="ward-content">
+          <div class="ward-details">
+            <h3>Location</h3>
+            <p>
+              Dassun ward is located along kutigi, lavun local government area
+              of niger state. It is located latitude by the North and longitude
+              by the east of lavun.
+            </p>
+
+            <p>
+              Dassun ward is a ward that shares the common boundary with kutigi
+              to the South, lagun to the North and dabban and batati ward to the
+              east respectively.
+            </p>
+
+            <h3>Overview</h3>
+            <p>
+              In lavun dassun ward is one of the strongest units, it's comprises
+              of 22 villages with 15 polling units among which includes RUGGA,
+              DASSUN, JIPAN GBATAMANGI, YETI, CHARATI, YAKUDI, DAKPANCHI, KUPE,
+              AND DABBAGI among other. Lagun a sister ward which was created out
+              of dassun ward in 1999.
+            </p>
+
+            <p>
+              Farming is the most major occupation in dassun ward. In dassun
+              ward the system of education that was in place was the Islamic and
+              traditional system of education, the islamic system of education
+              is the system that is in accordance with the teaching of the
+              Qur'an and Sunnah of the prophet (S.A.W) While the tradition was
+              the indigenous. It's the system that enables every home to teach
+              it's younger generation the life patterns of their society.For
+              instance, the boys accompany their father to build and mend houses
+              to hunting expedition's etc while the girls help their mother's in
+              farm to harvest, accompany them to market to buy or sell farm
+              products and help them to cook at home.
+            </p>
+
+            <h3>Education History</h3>
+            <p>
+              Western education started in Dassun ward in 1968 under the former
+              head of state of the federal Republic of Nigeria, General yakubu
+              Gowon. Before this development Dassun area was primitively
+              oriented, as such people has to be forced to go to school.
+            </p>
+
+            <p>
+              In the history, four primary schools were established in 1968, at
+              RUGGA, DASSUN, CHARATI, AND YET respectively. And in 1976, many
+              primary schools were established in lavun local government under
+              the universal primary education (UPE) which paves way for the
+              establishment of JIPAN, AND KUPE PRIMARY SCHOOLS.
+            </p>
+
+            <p>
+              In 2004, many primary schools were also established, under the
+              UNIVERSAL BASIC EDUCATION (UBE) and for the purpose of development
+              and remarkable increases of human population in DASSUN WARD,
+              Village like DABBAGI, GBATAMANGI, WONIGI ETC got their primary
+              schools established.
+            </p>
+
+            <p>
+              In 2005 two junior secondary schools were established which are
+              JIPAN AND DASSUN, respectively. In 2009 Yeti and CHARATI junior
+              secondary school were also established. In 2014 junior secondary
+              school jipan were accredited to senior secondary school with both
+              waec and neco centre, and jipan is the only senior secondary
+              school with waec and neco centre we have in the entire DASSUN
+              WARD.
+            </p>
+          </div>
+
+          <div class="image-gallery">
+            <div
+              class="gallery-item"
+              style="background-image: url('dassun1.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('dassun2.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('dassun3.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('dassun4.jpg')"
+            ></div>
+          </div>
+        </div>
+        <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
+      </section>
+
+      <section id="doko-ward" class="ward-section">
+        <h2>Doko Ward</h2>
+        <div class="ward-content">
+          <div class="ward-details">
+            <h3>Polling Units</h3>
+            <ul>
+              <li>Doko North Primary School</li>
+              <li>Emi-dazhi</li>
+              <li>Langbafu Tachin</li>
+              <li>Ungwar Ladan</li>
+              <li>Dakin Shawara I</li>
+              <li>Dakin Shawara II</li>
+              <li>Ntakogi</li>
+              <li>Boku</li>
+              <li>Boku Ndagbaji</li>
+              <li>Emi Gba</li>
+              <li>Kopa</li>
+              <li>Mambwari</li>
+              <li>Ungu</li>
+              <li>Unguwar Ladan</li>
+              <li>Gbanguba</li>
+              <li>Sheshi Saba</li>
+              <li>Vunchi Tifin</li>
+              <li>Vunchi Tako</li>
+              <li>Dadofugi</li>
+              <li>Kpakafu</li>
+              <li>Baka</li>
+              <li>Dazhi woro</li>
+              <li>Kusogi Majin</li>
+              <li>Langbafu</li>
+            </ul>
+
+            <h3>Brief History</h3>
+            <p>
+              From oral tradition, it is indicated that Hama Kolo was the first
+              man who was said to have settled at Sakoba. This is the place the
+              Doko people as known today settled first. The people at Sokoba
+              were known as Edoko, meaning plenty.
+            </p>
+
+            <p>
+              Hama Kolo was said to have come from the East with a Chieftaincy
+              titles known as Defian and Zhitsu. The Hama Kolo also had a son
+              called Saba. A time came when the Fulanis took away this Saba as a
+              slave to Raba (a village far away beyond River Kaduna) to cut
+              grasses as fodder for their horses. Later Saba escaped from Raba
+              and came to his father Hama Kolo at Sakoba. On his way coming,
+              Saba came along with the sickle which he used in cutting grass for
+              the Fulani horses. On his arrival he was asked what he was doing
+              at Raba with the sickle. Saba then informed the father that he was
+              cutting grass for the Fulani horses and that in Nupe language is
+              ego doko-gbe. This work of Saba then later became the name of the
+              settlement hence Doko having his name.
+            </p>
+
+            <h3>Geography</h3>
+            <p>
+              Doko is located on latitude 8 N and longitude 5 E. It is a
+              district in Lavun Local Government of Niger State. Doko is about
+              fifteen kilometers away from Bida, sharing boundary with Bida in
+              the North and Kwara State in the East.
+            </p>
+
+            <p>
+              Doko is one of the Beni organizations, a sub-tribe in Nupe
+              Kingdom. From the foot of the two flat-topped hills, the town
+              sweeps down into the plains. The land is undulating, rugged, and
+              dotted here and there with fold ridges.
+            </p>
+
+            <h3>Political Organization</h3>
+            <p>The Rank System in Doko (Hereditary System):</p>
+            <table>
+              <tr>
+                <th>Title</th>
+                <th>Office</th>
+                <th>Ward</th>
+                <th>Succession</th>
+              </tr>
+              <tr>
+                <td>Etsu Dazhi</td>
+                <td>Chief</td>
+                <td>Ward</td>
+                <td>Hereditary</td>
+              </tr>
+              <tr>
+                <td>Shaba</td>
+                <td>Assistant</td>
+                <td>Ward</td>
+                <td>Not Hereditary</td>
+              </tr>
+              <tr>
+                <td>Lile</td>
+                <td>Councillor</td>
+                <td>Ward</td>
+                <td>Presumptive</td>
+              </tr>
+              <tr>
+                <td>Kpotun</td>
+                <td>Councillor</td>
+                <td>Ward</td>
+                <td>Presumptive</td>
+              </tr>
+              <tr>
+                <td>Makun</td>
+                <td>Councillor</td>
+                <td>Ward</td>
+                <td>Presumptive</td>
+              </tr>
+              <tr>
+                <td>Defian</td>
+                <td>Councillor</td>
+                <td>Defianfu</td>
+                <td>Hereditary in one house</td>
+              </tr>
+              <tr>
+                <td>Dzoko</td>
+                <td>Councillor</td>
+                <td>Takogi</td>
+                <td>Hereditary in one house</td>
+              </tr>
+              <tr>
+                <td>Gboko</td>
+                <td>Councillor</td>
+                <td>Kpachinifugi</td>
+                <td>Hereditary in one house</td>
+              </tr>
+              <tr>
+                <td>Gbodo</td>
+                <td>Councillor</td>
+                <td>Dazhi</td>
+                <td>Hereditary in one house</td>
+              </tr>
+              <tr>
+                <td>Zhitsu Bebi</td>
+                <td>Councillor</td>
+                <td>Edoko</td>
+                <td>Hereditary in one house</td>
+              </tr>
+            </table>
+
+            <h3>Occupation</h3>
+            <p>
+              The major occupation of the people is principally subsistence
+              agriculture. The dominant crops produced are millet, maize, guinea
+              corn, beans, sweet potatoes, rice and cassava. Many of the farmers
+              keep livestock like sheep, goat, cattle, and poultry, while some
+              engage in crafts such as weaving, blacksmithing and sculpturing.
+            </p>
+
+            <h3>Business Opportunities</h3>
+            <p>
+              Doko, a community with a growing economy, presents business
+              opportunities across various sectors. These include e-commerce,
+              mobile car washes, and solar energy solutions, offering potential
+              for entrepreneurs to capitalize on local needs and emerging
+              markets.
+            </p>
+
+            <p>Specific Opportunities:</p>
+            <ul>
+              <li>E-commerce</li>
+              <li>Mobile Car Wash</li>
+              <li>Solar Energy</li>
+              <li>POS</li>
+              <li>Agriculture and Livestock</li>
+            </ul>
+
+            <h3>Mineral Resources</h3>
+            <p>
+              Doko community, particularly in the context of the geophysical
+              investigation of subsurface mineral potentials, is associated with
+              the presence of clay, mica, beryl, aquamarine, and emerald. These
+              minerals are found in regions like Ila Orangun, Patigi, Doko.
+              While not explicitly stated as a dominant resource in Doko, the
+              presence of these minerals indicates a potential for subsurface
+              mineral exploration and development in the area.
+            </p>
+
+            <h3>Challenges</h3>
+            <p>
+              One of the challenges we face in Doko community is lack of
+              infrastructure and basic amenities due to the increasing number of
+              people each passing day, the available basic amenities are limited
+              for utilization.
+            </p>
+
+            <p>
+              Another challenges faced by Doko ward is the tussle of the village
+              head title which has been the major issue mitigating the other
+              aspect of Development in the Community.
+            </p>
+          </div>
+
+          <div class="image-gallery">
+            <div
+              class="gallery-item"
+              style="background-image: url('doko1.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('doko2.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('doko3.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('doko4.jpg')"
+            ></div>
+          </div>
+        </div>
+        <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
+      </section>
+
+      <section id="egbako-ward" class="ward-section">
+        <h2>Egbako Ward</h2>
+        <div class="ward-content">
+          <div class="ward-details">
+            <h3>Polling Units</h3>
+            <ol>
+              <li>Dadi Basagi</li>
+              <li>Sonfada Gabi</li>
+              <li>Ajenatu</li>
+              <li>Egbako</li>
+              <li>Emizhitsu Tsoegi</li>
+              <li>Gogata Egbako</li>
+              <li>Sheshi Yisa</li>
+              <li>Ndako Gitsu</li>
+              <li>Santali</li>
+              <li>Gana Maru</li>
+              <li>Ndaruka</li>
+              <li>Kuba</li>
+              <li>Nnadindi</li>
+              <li>Kanko</li>
+              <li>Ebbo</li>
+            </ol>
+
+            <h3>Ward Center</h3>
+            <p>
+              The administrative center of the ward is located in Egbako
+              village.
+            </p>
+
+            <h3>Political Structure</h3>
+            <p>
+              Egbako Ward practices a zoning system divided into Zone A and Zone
+              B. When Zone A produces the councillor, Zone B produces the ward
+              chairman, and vice versa. Each political officeholder serves a
+              four-year term.
+            </p>
+
+            <h3>Natural Resources and Economy</h3>
+            <p>The ward is blessed with abundant natural resources such as:</p>
+            <ul>
+              <li>Shea butter</li>
+              <li>Palm trees</li>
+              <li>Kola nuts</li>
+              <li>Mangoes</li>
+            </ul>
+
+            <p>
+              Egbako is also known for its active communities of fishermen and
+              rice farmers, making it a significant hub for agricultural
+              products within the state.
+            </p>
+
+            <h3>Linguistic Diversity</h3>
+            <p>
+              Over ten languages are spoken in Egbako Ward, reflecting its rich
+              cultural diversity. These include:
+            </p>
+            <ul>
+              <li>Nupe</li>
+              <li>Hausa</li>
+              <li>Gwari</li>
+              <li>Dibo</li>
+              <li>Kanuri</li>
+              <li>Ebira</li>
+              <li>Yoruba</li>
+              <li>Igbo</li>
+              <li>Abawa</li>
+              <li>Tiv</li>
+              <li>Kakanda</li>
+              <li>Fulani</li>
+            </ul>
+
+            <h3>Market</h3>
+            <p>
+              Egbako Ward shares a common market with the neighboring Batati
+              Ward, fostering trade and interaction between the two communities.
+            </p>
+
+            <h3>Road Infrastructure</h3>
+            <p>
+              The ward faces challenges with poor road conditions, which
+              continue to hinder transportation, access to markets, and overall
+              development.
+            </p>
+
+            <h3>Economic Potential</h3>
+            <p>
+              Despite infrastructural setbacks, Egbako Ward remains one of the
+              largest producers of farm products in Niger State, highlighting
+              its vast potential for economic growth and investment
+              opportunities.
+            </p>
+
+            <h3>Traditional Rulers</h3>
+            <p>
+              Egbako Ward has a rich traditional leadership structure consisting
+              of:
+            </p>
+
+            <h4>10 District Heads (Etsuyankpa)</h4>
+            <ol>
+              <li>Etsuyankpa Ndaruka</li>
+              <li>Etsuyankpa Ebbo</li>
+              <li>Etsuyankpa Egbako</li>
+              <li>Etsuyankpa Gogata</li>
+              <li>Etsuyankpa Nnadindi</li>
+              <li>Etsuyankpa Kanko</li>
+              <li>Etsuyankpa Sonfada Gabi</li>
+              <li>Etsuyankpa Santali</li>
+              <li>Etsuyankpa Gana Maru</li>
+              <li>Etsuyankpa Basagi</li>
+            </ol>
+
+            <h4>5 Street/Community Heads (Ndazhitsu)</h4>
+            <ol>
+              <li>Ndazhitsu Ajenatu</li>
+              <li>Ndazhitsu Sheshi Yisa</li>
+              <li>Ndazhitsu Dari</li>
+              <li>Ndazhitsu Kuba</li>
+              <li>Ndazhitsu Ndaruka</li>
+            </ol>
+
+            <h3>Islamic Leaders</h3>
+            <p>
+              Over 30 Imams serve the community, although only a fraction are
+              officially recognized by the government.
+            </p>
+
+            <h3>Religious Composition</h3>
+            <p>
+              The population of Egbako Ward includes both Muslims and
+              Christians, living together in relative peace.
+            </p>
+
+            <h3>Ruling Party</h3>
+            <p>
+              The All Progressives Congress (APC) is the current ruling party in
+              Egbako Ward.
+            </p>
+          </div>
+
+          <div class="image-gallery">
+            <div
+              class="gallery-item"
+              style="background-image: url('egbako1.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('egbako2.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('egbako3.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('egbako4.jpg')"
+            ></div>
+          </div>
+        </div>
+        <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
+      </section>
+
+      <!-- Placeholder sections for the remaining wards -->
+      <section id="gaba-ward" class="ward-section">
+        <h2>Gaba Ward</h2>
+        <div class="ward-content">
+          <div class="ward-details">
+            <h3>Details Coming Soon</h3>
+            <p>
+              More information about Gaba Ward will be added when available.
+            </p>
+          </div>
+          <div class="image-gallery">
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+          </div>
+        </div>
+        <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
+      </section>
+
+      <section id="dabban-ward" class="ward-section">
+        <h2>Dabban Ward</h2>
+        <div class="ward-content">
+          <div class="ward-details">
+            <h3>Details Coming Soon</h3>
+            <p>
+              More information about Dabban Ward will be added when available.
+            </p>
+          </div>
+          <div class="image-gallery">
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+          </div>
+        </div>
+        <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
+      </section>
+
+      <section id="kusotachin-ward" class="ward-section">
+        <h2>Kusotachin Ward</h2>
+        <div class="ward-content">
+          <div class="ward-details">
+            <h3>Details Coming Soon</h3>
+            <p>
+              More information about Kusotachin Ward will be added when
+              available.
+            </p>
+          </div>
+          <div class="image-gallery">
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+          </div>
+        </div>
+        <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
+      </section>
+
+      <section id="mambe-ward" class="ward-section">
+        <h2>Mambe Ward</h2>
+        <div class="ward-content">
+          <div class="ward-details">
+            <h3>Details Coming Soon</h3>
+            <p>
+              More information about Mambe Ward will be added when available.
+            </p>
+          </div>
+          <div class="image-gallery">
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+          </div>
+        </div>
+        <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
+      </section>
+
+      <section id="lagun-ward" class="ward-section">
+        <h2>Lagun Ward</h2>
+        <div class="ward-content">
+          <div class="ward-details">
+            <h3>Details Coming Soon</h3>
+            <p>
+              More information about Lagun Ward will be added when available.
+            </p>
+          </div>
+          <div class="image-gallery">
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+            <div
+              class="gallery-item"
+              style="background-image: url('placeholder.jpg')"
+            ></div>
+          </div>
+        </div>
+        <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
+      </section>
+    </div>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2023 Lavun Local Government Area, Niger State, Nigeria</p>
+        <p>All Rights Reserved</p>
+        <a href="#wards-overview" class="back-to-top">Back to Top</a>
+      </div>
+    </footer>
+  </body>
+</html>
