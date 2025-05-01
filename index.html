@@ -641,27 +641,138 @@
     </header>
 
     <!-- Hero Section -->
-    <section
-      class="hero"
-      id="home"
-      style="
-        background-image: url('here.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-      "
-    >
-      <div class="container hero-content">
-        <h1>Welcome to NALLGOS</h1>
-        <p></p>
-        <div class="hero-buttons">
-          <a href="#scholarship" class="btn">Scholarship Portal</a>
-          <a href="#registration" class="btn btn-secondary"
-            >Student Registration</a
-          >
-        </div>
-      </div>
-    </section>
+   <section class="hero" id="home">
+  <div class="hero-carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" style="background-image: url('TOWNHALL.jpg');"></div>
+      <div class="carousel-item active" style="background-image: url('REPS.jpg');"></div>
+      <div class="carousel-item active" style="background-image: url('TOWN HALL.jpg');"></div>
+      <div class="carousel-item active" style="background-image: url('POLITICAL.jpg');"></div>
+    </div>
+  </div>
+  <div class="container hero-content">
+    <h1>Welcome to NALLGOS</h1>
+    <p></p>
+    <div class="hero-buttons">
+      <a href="#scholarship" class="btn">Scholarship Portal</a>
+      <a href="#registration" class="btn btn-secondary">Student Registration</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+  }
+  
+  .hero-carousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  
+  .carousel-inner {
+    display: flex;
+    width: 400%;
+    height: 100%;
+    transition: transform 1s ease-in-out;
+  }
+  
+  .carousel-item {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  
+  .hero-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .btn {
+    padding: 12px 24px;
+    background-color: #1a5276;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: #154360;
+  }
+  
+  .btn-secondary {
+    background-color: #d4ac0d;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #b7950b;
+  }
+</style>
+
+<!-- <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.carousel-inner');
+    const items = document.querySelectorAll('.carousel-item');
+    let currentIndex = 0;
+    const itemCount = items.length;
+    let rotationInterval;
+    
+    function rotateCarousel() {
+      // Move to next image
+      currentIndex = (currentIndex + 1) % itemCount;
+      const transformValue = -currentIndex * 100 + '%';
+      carousel.style.transform = 'translateX(' + transformValue + ')';
+      
+      // Clear existing interval
+      clearInterval(rotationInterval);
+      
+      // Set new interval after transition completes
+      setTimeout(function() {
+        rotationInterval = setInterval(rotateCarousel, 2000);
+      }, 2000); // Wait for the 1s transition to complete
+    }
+    
+    // Start rotating (2 seconds after page load, then 2 seconds after each transition)
+    setTimeout(function() {
+      rotationInterval = setInterval(rotateCarousel, 2000);
+    }, 2000);
+    
+    // Pause on hover
+    const hero = document.querySelector('.hero');
+    hero.addEventListener('mouseenter', function() {
+      clearInterval(rotationInterval);
+    });
+    
+    hero.addEventListener('mouseleave', function() {
+      clearInterval(rotationInterval);
+      // Restart with immediate transition
+      rotateCarousel();
+    });
+  });
+</script> -->
 
     <!-- Structures Section -->
     <section class="section" id="structures">
@@ -696,7 +807,7 @@
             </div>
           </div>
           <div class="gallery-item">
-            <img src="TOWN HALL.jpg" alt="Town Hall" />
+            <img src="TOWNHALL.jpg" alt="Town Hall" />
             <div class="gallery-caption">
               <h3>Conference Room</h3>
               <p>Venue for legislative gatherings</p>

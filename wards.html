@@ -227,6 +227,13 @@
   <body>
     <header>
       <div class="header-content">
+        <div class="coat-of-arms-container">
+          <img
+            src="Nigerian-Coat-of-Arms.png"
+            alt="Lavun LGA Coat of Arms"
+            class="coat-of-arms"
+          />
+        </div>
         <h1>Lavun Local Government Area</h1>
         <p class="subtitle">
           Explore the twelve political wards that make up Lavun LGA in Niger
@@ -234,6 +241,64 @@
         </p>
       </div>
     </header>
+
+    <style>
+      header {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("lavun-banner.jpg");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+        padding: 2rem 1rem;
+        position: relative;
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+
+      .coat-of-arms-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .coat-of-arms {
+        max-height: 120px;
+        width: auto;
+        object-fit: contain;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--secondary-color);
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      @media (max-width: 768px) {
+        .coat-of-arms {
+          max-height: 80px;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        .subtitle {
+          font-size: 1rem;
+        }
+      }
+    </style>
 
     <div class="container">
       <section id="wards-overview">
@@ -243,7 +308,7 @@
           <div class="ward-card" onclick="location.href='#kutigi-ward'">
             <div
               class="ward-image"
-              style="background-image: url('kutigi-thumb.jpg')"
+              style="background-image: url('KUTIGI3.png')"
             ></div>
             <div class="ward-info">
               <h3>Kutigi Ward</h3>
@@ -257,7 +322,7 @@
           <div class="ward-card" onclick="location.href='#doko-ward'">
             <div
               class="ward-image"
-              style="background-image: url('doko-thumb.jpg')"
+              style="background-image: url('DOKO.jpg')"
             ></div>
             <div class="ward-info">
               <h3>Doko Ward</h3>
@@ -476,25 +541,6 @@
               </li>
             </ul>
           </div>
-
-          <div class="image-gallery">
-            <div
-              class="gallery-item"
-              style="background-image: url('batati1.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('batati2.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('batati3.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('batati4.jpg')"
-            ></div>
-          </div>
         </div>
         <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
       </section>
@@ -606,25 +652,6 @@
               <li>We need portable water supply in our communities</li>
             </ol>
           </div>
-
-          <div class="image-gallery">
-            <div
-              class="gallery-item"
-              style="background-image: url('jima1.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('jima2.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('jima3.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('jima4.jpg')"
-            ></div>
-          </div>
         </div>
         <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
       </section>
@@ -734,25 +761,6 @@
               <li>Kuso Ndalegbo</li>
             </ol>
           </div>
-
-          <div class="image-gallery">
-            <div
-              class="gallery-item"
-              style="background-image: url('busu1.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('busu2.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('busu3.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('busu4.jpg')"
-            ></div>
-          </div>
         </div>
         <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
       </section>
@@ -822,25 +830,6 @@
               usually celebrated within three days. It starts on the eve of
               Kutigi's market day.
             </p>
-          </div>
-
-          <div class="image-gallery">
-            <div
-              class="gallery-item"
-              style="background-image: url('kutigi1.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('kutigi2.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('kutigi3.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('kutigi4.jpg')"
-            ></div>
           </div>
         </div>
         <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
@@ -919,25 +908,6 @@
               school with waec and neco centre we have in the entire DASSUN
               WARD.
             </p>
-          </div>
-
-          <div class="image-gallery">
-            <div
-              class="gallery-item"
-              style="background-image: url('dassun1.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('dassun2.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('dassun3.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('dassun4.jpg')"
-            ></div>
           </div>
         </div>
         <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
@@ -1136,25 +1106,6 @@
               aspect of Development in the Community.
             </p>
           </div>
-
-          <div class="image-gallery">
-            <div
-              class="gallery-item"
-              style="background-image: url('doko1.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('doko2.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('doko3.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('doko4.jpg')"
-            ></div>
-          </div>
         </div>
         <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
       </section>
@@ -1299,25 +1250,6 @@
               Egbako Ward.
             </p>
           </div>
-
-          <div class="image-gallery">
-            <div
-              class="gallery-item"
-              style="background-image: url('egbako1.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('egbako2.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('egbako3.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('egbako4.jpg')"
-            ></div>
-          </div>
         </div>
         <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
       </section>
@@ -1327,28 +1259,139 @@
         <h2>Gaba Ward</h2>
         <div class="ward-content">
           <div class="ward-details">
-            <h3>Details Coming Soon</h3>
+            <h3>Location and Administrative Structure</h3>
             <p>
-              More information about Gaba Ward will be added when available.
+              Gaba Ward is situated within Lavun Local Government Area (LGA) in
+              Niger State, Nigeria. It is one of several wards in Lavun LGA and
+              comprises the following polling units:
             </p>
-          </div>
-          <div class="image-gallery">
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
+
+            <ol>
+              <li>Gaba</li>
+              <li>Latiko</li>
+              <li>Sheshi bikun</li>
+              <li>Washi</li>
+              <li>Kuchita</li>
+              <li>Sokombo</li>
+              <li>Elomi</li>
+              <li>Tsowagba</li>
+              <li>Sheshi ewowara</li>
+              <li>Sonmazhi</li>
+              <li>Ubandoma</li>
+              <li>Tsadu nkochin</li>
+              <li>Dokotigi</li>
+            </ol>
+
+            <h3>Ward Center</h3>
+            <p>
+              The administrative center of the ward is located in Gaba village.
+            </p>
+
+            <h3>Political Structure</h3>
+            <p>
+              Gaba Ward practices a zoning system divided into Zone A and Zone
+              B. When Zone A produces the councillor, Zone B produces the ward
+              chairman, and vice versa. Each political officeholder serves a
+              four-year term.
+            </p>
+
+            <h3>Natural Resources and Economy</h3>
+            <p>The ward is blessed with abundant natural resources such as:</p>
+            <ul>
+              <li>Shea butter</li>
+              <li>Palm trees</li>
+              <li>Kola nuts</li>
+              <li>Mangoes</li>
+              <li>Orange</li>
+            </ul>
+
+            <p>
+              Gaba is also known for its active communities of and rice farmers,
+              making it a significant hub for agricultural products within the
+              state.
+            </p>
+
+            <h3>Linguistic Diversity</h3>
+            <p>
+              Over ten languages are spoken in Gaba Ward, reflecting its rich
+              cultural diversity. These include:
+            </p>
+            <ul>
+              <li>Nupe</li>
+              <li>Hausa</li>
+              <li>Gwari</li>
+              <li>Dibo</li>
+              <li>Kanuri</li>
+              <li>Ebira</li>
+              <li>Yoruba</li>
+              <li>Igbo</li>
+              <li>Kakanda</li>
+              <li>Fulani</li>
+            </ul>
+
+            <h3>Market</h3>
+            <p>
+              Gaba Ward shares a common market with the neighboring Batati Ward,
+              fostering trade and interaction between the two communities.
+            </p>
+
+            <h3>Road Infrastructure</h3>
+            <p>
+              The ward faces challenges with poor road conditions, which
+              continue to hinder transportation, access to markets, and overall
+              development.
+            </p>
+
+            <h3>Economic Potential</h3>
+            <p>
+              Despite infrastructural setbacks, Gaba Ward remains one of the
+              largest producers of farm products in Niger State, highlighting
+              its vast potential for economic growth and investment
+              opportunities.
+            </p>
+
+            <h3>Traditional Rulers</h3>
+            <p>
+              Gaba Ward has a rich traditional leadership structure consisting
+              of:
+            </p>
+
+            <h4>10 District Heads (Etsuyankpa)</h4>
+            <ol>
+              <li>Estu gaba</li>
+              <li>Etsuyankpa sheshi bikun</li>
+              <li>Etsuyankpa washi</li>
+              <li>Etsuyankpa elomi</li>
+              <li>Etsuyankpa sokombo</li>
+              <li>Etsuyankpa tsadu</li>
+              <li>Etsuyankpa eyagi</li>
+              <li>Etsuyankpa latiko</li>
+              <li>Etsuyankpa ejeti</li>
+              <li>Etsuyankpa kuchita</li>
+            </ol>
+
+            <h4>5 Street/Community Heads (Ndazhitsu)</h4>
+            <ol>
+              <li>Ndazhitsu gaba</li>
+            </ol>
+
+            <h3>Islamic Leaders</h3>
+            <p>
+              Over 30 Imams serve the community, although only a fraction are
+              officially recognized by the government.
+            </p>
+
+            <h3>Religious Composition</h3>
+            <p>
+              The population of Gaba Ward includes both Muslims and Christians,
+              living together in relative peace.
+            </p>
+
+            <h3>Ruling Party</h3>
+            <p>
+              The All Progressives Congress (APC) is the current ruling party in
+              Gaba Ward.
+            </p>
           </div>
         </div>
         <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
@@ -1363,24 +1406,6 @@
               More information about Dabban Ward will be added when available.
             </p>
           </div>
-          <div class="image-gallery">
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-          </div>
         </div>
         <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
       </section>
@@ -1389,29 +1414,255 @@
         <h2>Kusotachin Ward</h2>
         <div class="ward-content">
           <div class="ward-details">
-            <h3>Details Coming Soon</h3>
+            <h3>Location and Administrative Structure</h3>
             <p>
-              More information about Kusotachin Ward will be added when
-              available.
+              Kusotachin ward is situated within Lavun Local Government Area
+              (LGA) in Niger State, Nigeria. It is one of several wards in Lavun
+              LGA and comprises the following polling units:
             </p>
-          </div>
-          <div class="image-gallery">
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
+
+            <ol>
+              <li>Kusotachin bana</li>
+              <li>Dotako</li>
+              <li>Ndaloke</li>
+              <li>Gogata majin</li>
+              <li>Batako</li>
+              <li>Kotugi Dadi</li>
+              <li>Chenchaga</li>
+              <li>Majingari</li>
+              <li>Emilugi</li>
+              <li>Kagowogi</li>
+              <li>Kusotachin sakiwa</li>
+              <li>Shabamaliki</li>
+              <li>Nasarafu</li>
+              <li>Sachi</li>
+              <li>Ndawangwa</li>
+              <li>Nnafyanea</li>
+              <li>Kusotachin ndeji</li>
+              <li>Kupafu</li>
+              <li>Eyagi sodangi</li>
+              <li>Gadgza</li>
+            </ol>
+
+            <h3>Ward Center</h3>
+            <p>
+              The administrative center of the ward is located in Kusotachin
+              bana village.
+            </p>
+
+            <h3>Political Structure</h3>
+            <p>
+              Kusotachin ward practices a zoning system divided into Zone A,
+              Zone B and Zone C. When Zone A produces the councillor, Zone B
+              produces the ward chairman, and Zone C produces secretary vice
+              versa. Each political officeholder serves a four-year term.
+            </p>
+
+            <h3>Natural Resources and Economy</h3>
+            <p>The ward is blessed with abundant natural resources such as:</p>
+            <ul>
+              <li>Rice</li>
+              <li>Palm trees</li>
+              <li>Cassava</li>
+              <li>Mangoes</li>
+              <li>Millet</li>
+              <li>Maize</li>
+              <li>Potetor</li>
+              <li>Genius corn</li>
+              <li>Yam</li>
+              <li>Beans</li>
+              <li>Groundnut</li>
+            </ul>
+
+            <p>
+              Kusotachin is also known for its active communities of fishermen
+              and rice farmers, making it a significant hub for agricultural
+              products within the state.
+            </p>
+
+            <h3>Linguistic Diversity</h3>
+            <p>
+              Over 7 languages are spoken in Kusotachin Ward, reflecting its
+              rich cultural diversity. These include:
+            </p>
+            <ul>
+              <li>Nupe</li>
+              <li>Hausa</li>
+              <li>English</li>
+              <li>Tv</li>
+              <li>Yoruba</li>
+              <li>Igbo</li>
+              <li>Fulani</li>
+            </ul>
+
+            <h3>Market</h3>
+            <p>
+              Kusotachin Ward shares a common market with the neighboring local
+              government which is BIDA and BADDEGI, fostering trade and
+              interaction between the 3 communities.
+            </p>
+
+            <h3>Road Infrastructure</h3>
+            <p>
+              The ward faces challenges with poor road conditions, which
+              continue to hinder transportation, access to markets, and overall
+              development.
+            </p>
+
+            <h3>Economic Potential</h3>
+            <p>
+              Despite infrastructural setbacks, Kusotachin Ward remains one of
+              the largest producers of farm products in Niger State,
+              highlighting its vast potential for economic growth and investment
+              opportunities.
+            </p>
+
+            <h3>Traditional Rulers</h3>
+            <p>
+              Kusotachin Ward has a rich traditional leadership structure
+              consisting of:
+            </p>
+
+            <h4>18 District Heads (Etsuyankpa)</h4>
+            <ol>
+              <li>Etsuyankpa Emibana</li>
+              <li>Etsuyankpa manja</li>
+              <li>Etsuyankpa Emi gara</li>
+              <li>Etsuyankpa Sachi</li>
+              <li>Etsuyankpa chenchaga</li>
+              <li>Etsuyankpa kagowogi</li>
+              <li>Etsuyankpa Kusokapa</li>
+              <li>Etsuyankpa Kotugi Dadi</li>
+              <li>Etsuyankpa nnawoyegi</li>
+              <li>Etsuyankpa Ndaloke</li>
+              <li>Etsuyankpa majingari</li>
+              <li>Etsuyankpa kolobuso</li>
+              <li>Etsuyankpa shabamaliki</li>
+              <li>Etsuyankpa sodangi</li>
+              <li>Etsuyankpa gadza</li>
+              <li>Etsuyankpa eyagi</li>
+              <li>Etsuyankpa nasarafu</li>
+              <li>Etsuyankpa ndacheko</li>
+            </ol>
+
+            <h4>102 Street/Community Heads (Ndazhitsu)</h4>
+            <ol>
+              <li>Kotugi Dadi</li>
+              <li>Ekokun</li>
+              <li>Emisheshi</li>
+              <li>Tsowadzuru</li>
+              <li>Batako</li>
+              <li>Emitsadu</li>
+              <li>Jankari</li>
+              <li>Ndaloke tifin</li>
+              <li>Ndaloke Tako</li>
+              <li>Manzari</li>
+              <li>Emigara</li>
+              <li>Emindakotsu</li>
+              <li>Emisosun</li>
+              <li>Emindeji</li>
+              <li>Dotako</li>
+              <li>Emigbazhizhi</li>
+              <li>Gogata Majin</li>
+              <li>Tuwagi</li>
+              <li>Yallowa</li>
+              <li>Yezheba</li>
+              <li>Kupafu zodi</li>
+              <li>Kupafu mussa</li>
+              <li>Mandzuru</li>
+              <li>Kolobusu</li>
+              <li>Batavivogi</li>
+              <li>Ndamaraki</li>
+              <li>Emiworongi</li>
+              <li>Wodiko</li>
+              <li>Ndakenchi</li>
+              <li>Ntachigi</li>
+              <li>Majingari</li>
+              <li>Emistu</li>
+              <li>Majingari woro</li>
+              <li>Emishaba mama</li>
+              <li>Ndaturaki</li>
+              <li>Emilugi</li>
+              <li>Kusotachin sakiwa</li>
+              <li>Ndabata</li>
+              <li>Emigbari</li>
+              <li>Emi manja</li>
+              <li>Emi sofada</li>
+              <li>Dowogi</li>
+              <li>Dowogi woro</li>
+              <li>Emilugi woro</li>
+              <li>Ndarubu</li>
+              <li>Kagowogi</li>
+              <li>Emibanbo</li>
+              <li>Emi dogo</li>
+              <li>Eminnuta</li>
+              <li>Emimanko</li>
+              <li>Emi sode</li>
+              <li>Manna</li>
+              <li>Chenchaga</li>
+              <li>Chenchaga tetengi</li>
+              <li>Research</li>
+              <li>Sachi</li>
+              <li>Ndatuzhi</li>
+              <li>Army barrack</li>
+              <li>Ndawangwa</li>
+              <li>Nnafyanea</li>
+              <li>Gbando</li>
+              <li>Kusokapagi</li>
+              <li>Emi kupa</li>
+              <li>Emi dagbazhiko</li>
+              <li>Emi karimu</li>
+              <li>Emi sofada</li>
+              <li>Emi estu issa</li>
+              <li>Nnawoyegi</li>
+              <li>Kusotachin ndeji</li>
+              <li>Kusotachin Aliyu</li>
+              <li>Patishi</li>
+              <li>Patigi</li>
+              <li>Ekpastuwayan</li>
+              <li>Kusotachin miniko</li>
+              <li>Emi dogo</li>
+              <li>Ndacheko</li>
+              <li>Manzwakwa</li>
+              <li>Nnamamuna</li>
+              <li>Gadgza</li>
+              <li>Ndarubu</li>
+              <li>Alikuso tifin</li>
+              <li>Alikuso Tako</li>
+              <li>Emi alifa</li>
+              <li>Eyagi</li>
+              <li>Sodangi</li>
+              <li>Leje</li>
+              <li>Leje woro</li>
+              <li>Daddi</li>
+              <li>Emi duku</li>
+              <li>Emi gogoworo</li>
+              <li>Emi gogogbako</li>
+              <li>Tsaado</li>
+              <li>Emi ndaedechi</li>
+              <li>Shabamaliki</li>
+              <li>Emi diko</li>
+              <li>Emi estu woro</li>
+              <li>Gboko</li>
+              <li>Tswatagi</li>
+              <li>Danchita</li>
+              <li>Malogi</li>
+              <li>Nasarafu</li>
+              <li>Emiworongi nasarafu</li>
+              <li>Somazhi</li>
+            </ol>
+
+            <h3>Islamic Leaders</h3>
+            <p>
+              Over 102 Imams serve the community, although only a fraction are
+              officially recognized by the government.
+            </p>
+
+            <h3>Religious Composition</h3>
+            <p>
+              The population of Kusotachin Ward includes both Muslims and
+              Christians, living together in relative peace.
+            </p>
           </div>
         </div>
         <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
@@ -1426,24 +1677,6 @@
               More information about Mambe Ward will be added when available.
             </p>
           </div>
-          <div class="image-gallery">
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-          </div>
         </div>
         <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
       </section>
@@ -1456,24 +1689,6 @@
             <p>
               More information about Lagun Ward will be added when available.
             </p>
-          </div>
-          <div class="image-gallery">
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
-            <div
-              class="gallery-item"
-              style="background-image: url('placeholder.jpg')"
-            ></div>
           </div>
         </div>
         <a href="#wards-overview" class="back-to-top">Back to Wards List</a>
