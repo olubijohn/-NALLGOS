@@ -370,30 +370,30 @@
         color: #666;
         font-style: italic;
       }
-      
-.search-item {
-    margin-left: 20px;
-  }
-  
-  #search-form {
-    display: flex;
-  }
-  
-  #search-input {
-    padding: 8px;
-    border: none;
-    border-radius: 4px 0 0 4px;
-    width: 200px;
-  }
-  
-  #search-form button {
-    background: #f39c12;
-    border: none;
-    border-radius: 0 4px 4px 0;
-    padding: 0 12px;
-    cursor: pointer;
-    color: white;
-  }
+
+      .search-item {
+        margin-left: 20px;
+      }
+
+      #search-form {
+        display: flex;
+      }
+
+      #search-input {
+        padding: 8px;
+        border: none;
+        border-radius: 4px 0 0 4px;
+        width: 200px;
+      }
+
+      #search-form button {
+        background: #f39c12;
+        border: none;
+        border-radius: 0 4px 4px 0;
+        padding: 0 12px;
+        cursor: pointer;
+        color: white;
+      }
 
       /* Founder Section */
       .founder {
@@ -562,9 +562,9 @@
           padding: 20px;
           box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
-.search-item {
-      margin: 10px auto;
-    }
+        .search-item {
+          margin: 10px auto;
+        }
         nav ul.show {
           display: flex;
         }
@@ -616,42 +616,50 @@
           <img src="lafun-logo.jpg" alt="Lavun Logo" />
           <h1>NALLGOS</h1>
         </div>
-       <nav>
-  <div class="mobile-menu">☰</div>
-  <ul id="nav-menu">
-    <li><a href="#home">Home</a></li>
-    <li><a href="images.html">Structures</a></li>
-    <li><a href="#personalities">Personalities</a></li>
-     <li><a href="wards.html">WARDS OVERVIEW</a></li>
-    <li><a href="#resources">Resources</a></li>
-    <li><a href="#traditions">Traditions</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#stakeholders">Stakeholders</a></li>
-    <li><a href="https://www.brooksfreelibrary.org/elibrary/" class="elibrary">📚 E-Library</a></li>
-    <li><a href="CHAT.html">📚✉🧮 CHAT FORUM</a></li>
-    <li class="search-item">
-      <form id="search-form" onsubmit="return performSearch()">
-        <input type="text" id="search-input" placeholder="Search...">
-        <button type="submit"><i class="fas fa-search"></i></button>
-      </form>
-    </li>
-  </ul>
-</nav>
+        <nav>
+          <div class="mobile-menu">☰</div>
+          <ul id="nav-menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="images.html">Structures</a></li>
+            <li><a href="#personalities">Personalities</a></li>
+            <li><a href="wards.html">WARDS OVERVIEW</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#traditions">Traditions</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#stakeholders">Stakeholders</a></li>
+            <li>
+              <a
+                href="https://www.brooksfreelibrary.org/elibrary/"
+                class="elibrary"
+                >📚 E-Library</a
+              >
+            </li>
+            <li><a href="CHAT.html">📚✉🧮 CHAT FORUM</a></li>
+            <li class="search-item">
+              <form id="search-form" onsubmit="return performSearch()">
+                <input type="text" id="search-input" placeholder="Search..." />
+                <button type="submit"><i class="fas fa-search"></i></button>
+              </form>
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home" style="background-image: url('HERO.jpg');">
+    <section class="hero" id="home" style="background-image: url('HERO.jpg')">
       <div class="container hero-content">
         <h1>Welcome to NALLGOS</h1>
         <p></p>
         <div class="hero-buttons">
           <a href="#scholarship" class="btn">Scholarship Portal</a>
-          <a href="#registration" class="btn btn-secondary">Student Registration</a>
+          <a href="#registration" class="btn btn-secondary"
+            >Student Registration</a
+          >
         </div>
       </div>
     </section>
-    
+
     <style>
       .hero {
         position: relative;
@@ -665,10 +673,15 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        background-color: rgba(0, 0, 0, 0.5); /* Fallback if image doesn't load */
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.5
+        ); /* Fallback if image doesn't load */
         background-blend-mode: overlay;
       }
-      
+
       .hero-content {
         position: relative;
         z-index: 2;
@@ -676,13 +689,13 @@
         max-width: 1200px;
         margin: 0 auto;
       }
-      
+
       .hero h1 {
         font-size: 3rem;
         margin-bottom: 1rem;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
       }
-      
+
       .hero-buttons {
         display: flex;
         gap: 20px;
@@ -690,7 +703,7 @@
         margin-top: 30px;
         flex-wrap: wrap;
       }
-      
+
       .btn {
         padding: 12px 24px;
         background-color: #1a5276;
@@ -701,30 +714,30 @@
         transition: all 0.3s ease;
         border: 2px solid transparent;
       }
-      
+
       .btn:hover {
         background-color: #154360;
         transform: translateY(-2px);
       }
-      
+
       .btn-secondary {
         background-color: #d4ac0d;
       }
-      
+
       .btn-secondary:hover {
         background-color: #b7950b;
       }
-      
+
       @media (max-width: 768px) {
         .hero h1 {
           font-size: 2rem;
         }
-        
+
         .hero-buttons {
           flex-direction: column;
           gap: 15px;
         }
-        
+
         .btn {
           width: 100%;
           max-width: 250px;
@@ -732,7 +745,6 @@
         }
       }
     </style>
-
 
     <!-- Structures Section -->
     <section class="section" id="structures">
@@ -804,16 +816,13 @@
         <div class="team-grid">
           <div class="team-member">
             <div class="team-img">
-              <img
-                src="chairman.jpeg"
-                alt="Local Government Chairman"
-              />
+              <img src="chairman.jpeg" alt="Local Government Chairman" />
             </div>
             <div class="team-info">
-              <h3>Hon Mohammad Isah kutigi,
-</h3>
-              <p>Executive Council chairman.
-Lavun Local Government, Niger State</p>
+              <h3>Hon Mohammad Isah kutigi</h3>
+              <p>
+                Executive Council chairman. Lavun Local Government, Niger State
+              </p>
             </div>
           </div>
           <div class="team-member">
@@ -821,8 +830,10 @@ Lavun Local Government, Niger State</p>
               <img src="emir.jpeg" alt="Traditional Ruler" />
             </div>
             <div class="team-info">
-              <h3>HRH, Alhaji Mohammad Ibrahim Kudu</BR>
-Ezanuwan of kutigi kingdom.</h3>
+              <h3>
+                HRH, Alhaji Mohammad Ibrahim Kudu<br />Ezanuwan of kutigi
+                kingdom.
+              </h3>
               <p>Emir of Lavun</p>
             </div>
           </div>
@@ -832,8 +843,7 @@ Ezanuwan of kutigi kingdom.</h3>
             </div>
             <div class="team-info">
               <h3>Dr. Joshua Audugana</h3>
-              <p>House rep,
-Lavun, edati, mokwa,</p>
+              <p>House rep, Lavun, edati, mokwa</p>
             </div>
           </div>
           <div class="team-member">
@@ -841,10 +851,15 @@ Lavun, edati, mokwa,</p>
               <img src="leader.jpg" alt="Business Leader" />
             </div>
             <div class="team-info">
-              <h3>Hon Ahmed Nkochi,</h3>
+              <h3>Hon Ahmed Nkochi</h3>
               <p>Leader, councillor forum. Lavun Local Government</p>
             </div>
           </div>
+        </div>
+        <div class="see-more-btn">
+          <a href="MAINPERSONALITIES.html" class="btn"
+            >SEE MORE PERSONALITIES</a
+          >
         </div>
       </div>
     </section>
@@ -1088,32 +1103,84 @@ Lavun, edati, mokwa,</p>
         <div class="about-content">
           <div class="about-text">
             <h3>History of Lavun LGA</h3>
-           <p>Lavun, is a local government area (LGA) in Niger State, Nigeria. It is located in the central part of the state and shares borders with other LGAs such as Edati, Mokwa, Bida, Lapai, Agaie, and Gurara. Lavun LGA is predominantly rural, with headquarter located in kutigi and is known for its agricultural activities, cultural heritage, and natural beauty.
-           </p>
+            <p>
+              Lavun, is a local government area (LGA) in Niger State, Nigeria.
+              It is located in the central part of the state and shares borders
+              with other LGAs such as Edati, Mokwa, Bida, Lapai, Agaie, and
+              Gurara. Lavun LGA is predominantly rural, with headquarter located
+              in kutigi and is known for its agricultural activities, cultural
+              heritage, and natural beauty.
+            </p>
 
-<p>Agriculture is the mainstay of the economy in Lavun. The fertile soil, flatland and favorable climate support the cultivation of various crops, including maize, millet, sorghum, grandnut, yam, and vegetables. The local population actively engages in farming, fishing and livestock rearing, contributing to the food production and livelihoods of the residents.
-</p>
+            <p>
+              Agriculture is the mainstay of the economy in Lavun. The fertile
+              soil, flatland and favorable climate support the cultivation of
+              various crops, including maize, millet, sorghum, grandnut, yam,
+              and vegetables. The local population actively engages in farming,
+              fishing and livestock rearing, contributing to the food production
+              and livelihoods of the residents.
+            </p>
 
-<p>Lavun is home to diverse ethnic groups, including the Gwari, Kamuku, Kambari, and Hausa, but the largest and owner of the local government are Nupes, Each group has its unique traditions, languages, and cultural practices. Traditional festivals and celebrations are held throughout the year, showcasing the rich cultural heritage of the community.
-</p>
+            <p>
+              Lavun is home to diverse ethnic groups, including the Gwari,
+              Kamuku, Kambari, and Hausa, but the largest and owner of the local
+              government are Nupes, Each group has its unique traditions,
+              languages, and cultural practices. Traditional festivals and
+              celebrations are held throughout the year, showcasing the rich
+              cultural heritage of the community.
+            </p>
 
-<p>The natural beauty of Lavun adds to its charm. The LGA is blessed with picturesque landscapes, rolling hills, and scenic views. It is a delight for nature enthusiasts and adventurers. The area is also dotted with rivers and streams, providing opportunities for fishing and other recreational activities.
-</p>
+            <p>
+              The natural beauty of Lavun adds to its charm. The LGA is blessed
+              with picturesque landscapes, rolling hills, and scenic views. It
+              is a delight for nature enthusiasts and adventurers. The area is
+              also dotted with rivers and streams, providing opportunities for
+              fishing and other recreational activities.
+            </p>
 
+            <p>
+              Lavun LGA is committed to improving the well-being of its
+              residents. Efforts have been made to provide essential amenities
+              and infrastructure, including schools, healthcare centers,
+              markets, and motorable roads, to enhance the quality of life for
+              the local population.
+            </p>
 
-<p>Lavun LGA is committed to improving the well-being of its residents. Efforts have been made to provide essential amenities and infrastructure, including schools, healthcare centers, markets, and motorable roads, to enhance the quality of life for the local population.
-</p>
+            <p>
+              The community spirit is strong in Lavun, with residents engaging
+              in communal activities and supporting one another. The people are
+              known for their warmth and hospitality, welcoming visitors and
+              creating a sense of belonging. Lavun offers a serene and tranquil
+              environment, away from the bustling city life. It provides an
+              opportunity to experience the rural lifestyle, appreciate nature,
+              and immerse oneself in the cultural traditions of the area.
+            </p>
 
-
-<p>The community spirit is strong in Lavun, with residents engaging in communal activities and supporting one another. The people are known for their warmth and hospitality, welcoming visitors and creating a sense of belonging.
-Lavun offers a serene and tranquil environment, away from the bustling city life. It provides an opportunity to experience the rural lifestyle, appreciate nature, and immerse oneself in the cultural traditions of the area.
-</p>
-
-<h3>OVERALL,</h3>
-<p>Lavun is a place where agriculture thrives, cultural diversity is celebrated, and natural beauty abounds. It presents a unique blend of rural charm and community spirit, making it a noteworthy destination within Niger State.
-</p>
-<h3>Summary</h3>
-<p>Lavun, located in the central part of Niger State, Nigeria, is a predominantly rural local government area known for its agricultural activities, cultural diversity, and natural beauty. it's a home of nupe speaking language. The fertile land supports the cultivation of crops like maize, millet, rice, and sorghum, with farming and livestock rearing being central to the local economy. Home to diverse ethnic groups such as the Nupe, Gwari, Kamuku, Kambari, and Hausa, Lavun celebrates its cultural heritage through traditional festivals. The area boasts scenic landscapes, hills, rivers, and streams, offering recreational opportunities like fishing. Lavun is committed to improving residents' quality of life with infrastructure like schools, healthcare centers, and roads, and is known for its strong community spirit and hospitality. With its serene environment and rich traditions, Lavun provides a unique rural experience in niger state</p>
+            <h3>OVERALL,</h3>
+            <p>
+              Lavun is a place where agriculture thrives, cultural diversity is
+              celebrated, and natural beauty abounds. It presents a unique blend
+              of rural charm and community spirit, making it a noteworthy
+              destination within Niger State.
+            </p>
+            <h3>Summary</h3>
+            <p>
+              Lavun, located in the central part of Niger State, Nigeria, is a
+              predominantly rural local government area known for its
+              agricultural activities, cultural diversity, and natural beauty.
+              it's a home of nupe speaking language. The fertile land supports
+              the cultivation of crops like maize, millet, rice, and sorghum,
+              with farming and livestock rearing being central to the local
+              economy. Home to diverse ethnic groups such as the Nupe, Gwari,
+              Kamuku, Kambari, and Hausa, Lavun celebrates its cultural heritage
+              through traditional festivals. The area boasts scenic landscapes,
+              hills, rivers, and streams, offering recreational opportunities
+              like fishing. Lavun is committed to improving residents' quality
+              of life with infrastructure like schools, healthcare centers, and
+              roads, and is known for its strong community spirit and
+              hospitality. With its serene environment and rich traditions,
+              Lavun provides a unique rural experience in niger state
+            </p>
             <h3>Wards in Lavun LGA</h3>
             <p>
               LAVUN LOCAL GOVERNMENT COMPRISES OF TWELVE (12) POLITICAL WARDS.
@@ -1151,17 +1218,21 @@ Lavun offers a serene and tranquil environment, away from the bustling city life
             </p>
             <p></p>
             <div class="polling-units">
-              
-              
-                <h3>ABOUT DASSUN WARD</h3>
+              <h3>ABOUT DASSUN WARD</h3>
 
-<p>Dassun  ward is located along kutigi, lavun local government area of niger state. It is located latitude by the North and longitude by the east of lavun. 
-Dassun ward is a ward that shares the common boundary with kutigi to the South, lagun to the North and dabban and batati ward to the east respectively. 
- 
-In lavun dassun ward is one of the strongest units, it's comprises of 22 villages with 15 polling units among which includes RUGGA, DASSUN, JIPAN GBATAMANGI, YETI, CHARATI,YAKUDI, DAKPANCHI , KUPE, AND DABBAGI among other. Lagun a sister ward which was created out of dassun ward in 1999.
-</p>
+              <p>
+                Dassun ward is located along kutigi, lavun local government area
+                of niger state. It is located latitude by the North and
+                longitude by the east of lavun. Dassun ward is a ward that
+                shares the common boundary with kutigi to the South, lagun to
+                the North and dabban and batati ward to the east respectively.
+                In lavun dassun ward is one of the strongest units, it's
+                comprises of 22 villages with 15 polling units among which
+                includes RUGGA, DASSUN, JIPAN GBATAMANGI, YETI, CHARATI,YAKUDI,
+                DAKPANCHI , KUPE, AND DABBAGI among other. Lagun a sister ward
+                which was created out of dassun ward in 1999.
+              </p>
             </div>
-            
           </div>
           <div class="about-img">
             <img src="map.jpg" alt="Map of Lavun LGA" />
@@ -1248,7 +1319,7 @@ In lavun dassun ward is one of the strongest units, it's comprises of 22 village
             </div>
             <div class="team-info">
               <h3>Hajiya Fatima Umar Bago</h3>
-              <p>First Lady </p>
+              <p>First Lady</p>
             </div>
           </div>
         </div>
@@ -1265,38 +1336,165 @@ In lavun dassun ward is one of the strongest units, it's comprises of 22 village
           <img src="FOUNDER.jpg" alt="Founder of NALLGOS" />
         </div>
         <div class="founder-info">
-          <h3>COMR. HASSAN ABUBAKAR
-RN, RNA, BNSc, MNSc (in view).
-n</h3>
+          <h3>COMR. HASSAN ABUBAKAR RN, RNA, BNSc, MNSc (in view). n</h3>
           <p>
-           Early Life and Education
-- Born into a respected family in Kutigi, Lavun Local Government
-- Completed primary education at Nasara Primary School Kutigi
-- Attended Government Science College Kutigi (now Idris Legbo Science College Kutigi) for secondary education
-- Pursued a career in nursing, earning qualifications from School Of Nursing Bida and Ahmadu Bello University Teaching Hospital Tudun Wada Zaria
-- Earned a Bachelor of Nursing Science (BNSc) degree from Ladoke Akintola University of Technology Ogbomoso
-- Currently pursuing a Master's degree in Nursing Science (MNSc) at Ladoke Akintola University of Technology Ogbomoso
-
-
+            Early Life and Education - Born into a respected family in Kutigi,
+            Lavun Local Government - Completed primary education at Nasara
+            Primary School Kutigi - Attended Government Science College Kutigi
+            (now Idris Legbo Science College Kutigi) for secondary education -
+            Pursued a career in nursing, earning qualifications from School Of
+            Nursing Bida and Ahmadu Bello University Teaching Hospital Tudun
+            Wada Zaria - Earned a Bachelor of Nursing Science (BNSc) degree from
+            Ladoke Akintola University of Technology Ogbomoso - Currently
+            pursuing a Master's degree in Nursing Science (MNSc) at Ladoke
+            Akintola University of Technology Ogbomoso
           </p>
           <p>
-            Professional Career
-- Works as a Senior Nursing Officer (SNO) at Federal Medical Centre Bida, Niger State
-- Has dedicated his career to promoting health services and caring for patients
-
+            Professional Career - Works as a Senior Nursing Officer (SNO) at
+            Federal Medical Centre Bida, Niger State - Has dedicated his career
+            to promoting health services and caring for patients
           </p>
           <p>
-            Leadership and Community Service
-- Founded the National Association of Lavun Local Government Students (NALLGOS) in 2017
-- Served as Acting NALLGOS National President (2017/2018) and first Elected Executive President (2018/2019)
-- Has contributed significantly to promoting education and youth development in Lavun Local Government
-
+            Leadership and Community Service - Founded the National Association
+            of Lavun Local Government Students (NALLGOS) in 2017 - Served as
+            Acting NALLGOS National President (2017/2018) and first Elected
+            Executive President (2018/2019) - Has contributed significantly to
+            promoting education and youth development in Lavun Local Government
           </p>
           <p>
-            Personal Life
-- Happily married with two male children, Idris and Muhammad Imtiaz
+            Personal Life - Happily married with two male children, Idris and
+            Muhammad Imtiaz Comr. Hassan Abubakar's achievements serve as an
+            inspiration to many, demonstrating the impact one person can have on
+            their community through hard work, dedication, and a passion
+            for helping others.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="section founder">
+      <div class="container">
+        <div class="section-title">
+          <h2>About the Website Founder</h2>
+        </div>
+        <div class="founder-img">
+          <img src="MAHMUD_KUDU.jpg" alt="Founder of NALLGOS" />
+        </div>
+        <div class="founder-info">
+          <h3>AMBASSADOR COMRADE MAHMUD KUDU BABA KUTIGI</h3>
+          <p>
+            My names are AMBASSADOR COMRADE MAHMUD KUDU BABA KUTIGI, a proud
+            indigene of Lavun Local Government, hailing from Kutigi Town,
+            specifically the Yafu Compound. I was born into the NDAZHOKO KUTIGI
+            FAMILY, a heritage I hold in high esteem.
+          </p>
+          <p>
+            My educational journey began in MADALLA, under SULEJA LOCAL
+            GOVERNMENT down to my home town KUTIGI, and has progressed through
+            various stages of academic/community development. I acquired NCE in
+            business education (Coe Minna), and ND in business management
+            (INSTITUTE OF ADMINISTRATION, ABU ZARIA), while I currently hold Bsc
+            in business administration (ABU ZARIA) and throughout my life, I
+            have dedicated myself to education, activism, and community
+            development.
+          </p>
+          <p>
+            Over the years, I have served in different leadership capacities,
+            where I left behind remarkable legacies, which includes community
+            empowerment, peaceful engagement, and grassroots mobilization. I am
+            also a committed activist, a peace ambassador, and an active
+            grassroots politician advocating for inclusiveness, unity, and
+            development.
+          </p>
+          <p>
+            I practice Islam, and I am happily married with children, striving
+            every day to balance my family life with my mission to uplift my
+            people.
+          </p>
+        </div>
+      </div>
+    </section>
 
-Comr. Hassan Abubakar's achievements serve as an inspiration to many, demonstrating the impact one person can have on their community through hard work, dedication, and a passion for helping others.
+    <section class="section website-purpose">
+      <div class="container">
+        <div class="section-title">
+          <h2>About NALLGOS Website</h2>
+        </div>
+        <div class="purpose-info">
+          <h3>The Purpose of the Website</h3>
+          <p>
+            The NALLGOS website was conceived and developed with a singular
+            goal: to unite and empower all NALLGOSites and Lavun indigenes
+            across Nigeria and the globe. This platform represents a digital
+            transformation of the Almighty NALLGOS, enabling a connected and
+            informed community.
+          </p>
+
+          <h4>Core Objectives of the Website:</h4>
+          <p>
+            1. <strong>COMMUNITY UNITY & COLLABORATION</strong><br />
+            To foster unity among all sons and daughters of Lavun Local
+            Government, and to facilitate collaboration with top politicians,
+            NGOs, philanthropists, and institutions for:<br />
+            - Scholarships<br />
+            - Sponsorships<br />
+            - Youth empowerment<br />
+            - Employment opportunities
+          </p>
+          <p>
+            2. <strong>SUPPORT FOR PERSONS WITH SPECIAL NEEDS</strong><br />
+            To ensure fast and easy access to information and support for people
+            with disabilities within our community.
+          </p>
+          <p>
+            3. <strong>EDUCATIONAL & INSTITUTIONAL MAPPING</strong><br />
+            To maintain up to date statistics of Lavun students studying in
+            institutions across the world, including their areas of
+            specialization.
+          </p>
+          <p>
+            4. <strong>RESOURCE IDENTIFICATION</strong><br />
+            To identify untapped mineral resources across Lavun Local
+            Government, including their precise locations.
+          </p>
+          <p>
+            5. <strong>DIGITAL LIBRARY ACCESS</strong><br />
+            To provide a free e-library for students and members to access
+            textbooks, novels, and research materials.
+          </p>
+          <p>
+            6. <strong>SOCIAL INTERACTION & INFORMATION SHARING</strong><br />
+            To allow users to interact, chat, and share ideas or news through a
+            secure CHAT BOX.
+          </p>
+          <p>
+            7. <strong>POLITICAL AWARENESS & ENGAGEMENT</strong><br />
+            To provide information on the total political units and wards within
+            Lavun, and to highlight key local challenges and sources of
+            livelihood in those areas.
+          </p>
+          <p>
+            8. <strong>TRANSPARENCY & PROGRESS MONITORING</strong><br />
+            To keep the public informed through timely updates on development
+            and activities within the local government.
+          </p>
+
+          <h4>Features of the Website</h4>
+          <p>
+            - The website possesses official domain name and secure IP
+            address<br />
+            - It's also has safe, reliable, and user friendly interface<br />
+            - Non commercial, purpose driven platform.
+          </p>
+          <p>
+            NALLGOS is not just a website it is a movement, a community, and a
+            vision. It is the first of its kind in the history of Lavun Local
+            Government and Niger State at large. It stands as a beacon of hope,
+            innovation, and unity for our people.
+          </p>
+          <p class="signature">
+            E-sign<br />
+            COMR MAHMUD KUDU BABA KUTIGI<br />
+            08134033447
           </p>
         </div>
       </div>
@@ -1313,9 +1511,12 @@ Comr. Hassan Abubakar's achievements serve as an inspiration to many, demonstrat
               development among students from Lavun Local Government Area.
             </p>
             <div class="social-links">
-              <a href="https://www.facebook.com/profile.php?id=100084462033944"><i class="fab fa-facebook-f">f</i></a>
-              <a href="https://chat.whatsapp.com/LnpVKEJ2WLHBzipamBhwPn"><i class="fab fa-whatsapp">W</i></a>
-              
+              <a href="https://www.facebook.com/profile.php?id=100084462033944"
+                ><i class="fab fa-facebook-f">f</i></a
+              >
+              <a href="https://chat.whatsapp.com/LnpVKEJ2WLHBzipamBhwPn"
+                ><i class="fab fa-whatsapp">W</i></a
+              >
             </div>
           </div>
           <div class="footer-column">
@@ -1517,23 +1718,26 @@ Comr. Hassan Abubakar's achievements serve as an inspiration to many, demonstrat
           modal.style.display = "none";
         }
       });
- 
-  // Search function
-  function performSearch() {
-    const query = document.getElementById('search-input').value.trim();
-    if (query) {
-      window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
-    }
-    return false;
-  }
-  
-  // Add keyboard shortcut (Ctrl+K or Cmd+K) for search
-  document.addEventListener('keydown', function(e) {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-      e.preventDefault();
-      document.getElementById('search-input').focus();
-    }
-  });
+
+      // Search function
+      function performSearch() {
+        const query = document.getElementById("search-input").value.trim();
+        if (query) {
+          window.open(
+            `https://www.google.com/search?q=${encodeURIComponent(query)}`,
+            "_blank"
+          );
+        }
+        return false;
+      }
+
+      // Add keyboard shortcut (Ctrl+K or Cmd+K) for search
+      document.addEventListener("keydown", function (e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+          e.preventDefault();
+          document.getElementById("search-input").focus();
+        }
+      });
     </script>
   </body>
 </html>
