@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NALLGOS CHAT FORUM</title>
+    <!-- Add Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <style>
       /* Global Styles */
       * {
@@ -183,6 +187,7 @@
         align-items: center;
         padding: 8px 0;
         border-bottom: 1px solid #eee;
+        cursor: pointer;
       }
 
       .user-item img {
@@ -391,6 +396,37 @@
         color: white;
       }
 
+      /* Loading spinner */
+      .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Notification */
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #ff4444;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        display: none;
+      }
+
       /* Responsive Styles */
       @media (max-width: 768px) {
         .forum-sidebar {
@@ -427,7 +463,7 @@
             <label for="login-password">Password</label>
             <input type="password" id="login-password" required />
           </div>
-          <button type="submit">Login</button>
+          <button type="submit" id="login-btn">Login</button>
         </form>
         <div class="auth-switch">
           Don't have an account? <a href="#" id="show-signup">Sign Up</a>
@@ -449,8 +485,13 @@
             <input type="email" id="signup-email" required />
           </div>
           <div class="form-group">
-            <label for="signup-password">Password</label>
-            <input type="password" id="signup-password" required />
+            <label for="signup-password">Password (min 6 characters)</label>
+            <input
+              type="password"
+              id="signup-password"
+              minlength="6"
+              required
+            />
           </div>
           <div class="form-group">
             <label for="signup-role">I am a:</label>
@@ -460,7 +501,7 @@
               <option value="exco">Exco Member</option>
             </select>
           </div>
-          <button type="submit">Sign Up</button>
+          <button type="submit" id="signup-btn">Sign Up</button>
         </form>
         <div class="auth-switch">
           Already have an account? <a href="#" id="show-login">Login</a>
@@ -474,11 +515,11 @@
         <h1 id="forum-title">Student Forum</h1>
         <div class="user-info">
           <img
-            src="https://ui-avatars.com/api/?name=John+Doe"
+            src="https://ui-avatars.com/api/?name=User"
             alt="User"
             id="user-avatar"
           />
-          <span id="user-name">John Doe</span>
+          <span id="user-name">User</span>
           <button class="logout-btn" id="logout-btn">Logout</button>
         </div>
       </div>
@@ -582,7 +623,26 @@
       </div>
     </div>
 
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
     <script>
+      // Firebase configuration - Replace with your actual Firebase config
+      const firebaseConfig = {
+        apiKey: "AIzaSyD8zL8Pvz0v7yJ4X4X4X4X4X4X4X4X4X4X4",
+        authDomain: "nallgos-chat-forum.firebaseapp.com",
+        databaseURL: "https://nallgos-chat-forum-default-rtdb.firebaseio.com",
+        projectId: "nallgos-chat-forum",
+        storageBucket: "nallgos-chat-forum.appspot.com",
+        messagingSenderId: "123456789012",
+        appId: "1:123456789012:web:abcdefghijklmnopqrstuv",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const database = firebase.database();
+
       // DOM Elements
       const loginContainer = document.getElementById("login-container");
       const signupContainer = document.getElementById("signup-container");
@@ -591,6 +651,8 @@
       const showLogin = document.getElementById("show-login");
       const loginForm = document.getElementById("login-form");
       const signupForm = document.getElementById("signup-form");
+      const loginBtn = document.getElementById("login-btn");
+      const signupBtn = document.getElementById("signup-btn");
       const logoutBtn = document.getElementById("logout-btn");
       const userList = document.getElementById("user-list");
       const studentMessages = document.getElementById("student-messages");
@@ -607,70 +669,14 @@
       const userName = document.getElementById("user-name");
       const userAvatar = document.getElementById("user-avatar");
       const forumTitle = document.getElementById("forum-title");
+      const notification = document.getElementById("notification");
 
-      // Sample data (in a real app, this would come from a database)
-      let users = [
-        {
-          id: 1,
-          name: "John Doe",
-          email: "john@example.com",
-          role: "student",
-          online: true,
-          avatar: "https://ui-avatars.com/api/?name=John+Doe",
-        },
-        {
-          id: 2,
-          name: "Jane Smith",
-          email: "jane@example.com",
-          role: "student",
-          online: true,
-          avatar: "https://ui-avatars.com/api/?name=Jane+Smith",
-        },
-        {
-          id: 3,
-          name: "Mike Johnson",
-          email: "mike@example.com",
-          role: "exco",
-          online: true,
-          avatar: "https://ui-avatars.com/api/?name=Mike+Johnson",
-        },
-        {
-          id: 4,
-          name: "Sarah Williams",
-          email: "sarah@example.com",
-          role: "exco",
-          online: false,
-          avatar: "https://ui-avatars.com/api/?name=Sarah+Williams",
-        },
-      ];
-
-      let messages = {
-        student: [
-          {
-            id: 1,
-            userId: 1,
-            text: "Hey everyone! How's the semester going?",
-            time: "10:30 AM",
-          },
-          {
-            id: 2,
-            userId: 2,
-            text: "It's going well! Just busy with assignments.",
-            time: "10:32 AM",
-          },
-        ],
-        exco: [
-          {
-            id: 1,
-            userId: 3,
-            text: "Welcome to the Exco group. Let's plan the next event.",
-            time: "9:15 AM",
-          },
-        ],
-      };
-
-      // Current user
+      // Current user data
       let currentUser = null;
+      let currentUserRef = null;
+      let usersRef = null;
+      let studentMessagesRef = null;
+      let excoMessagesRef = null;
 
       // Toggle between login and signup forms
       showSignup.addEventListener("click", (e) => {
@@ -685,58 +691,140 @@
         loginContainer.style.display = "flex";
       });
 
+      // Show notification
+      function showNotification(message, isError = true) {
+        notification.textContent = message;
+        notification.style.display = "block";
+        notification.style.background = isError ? "#ff4444" : "#4CAF50";
+
+        setTimeout(() => {
+          notification.style.display = "none";
+        }, 3000);
+      }
+
       // Login form submission
-      loginForm.addEventListener("submit", (e) => {
+      loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const email = document.getElementById("login-email").value;
         const password = document.getElementById("login-password").value;
 
-        // In a real app, you would validate credentials with a server
-        const user = users.find((u) => u.email === email);
+        try {
+          // Show loading state
+          loginBtn.innerHTML = '<span class="spinner"></span> Logging in...';
+          loginBtn.disabled = true;
 
-        if (user) {
-          // Successful login
-          currentUser = user;
-          initializeForum();
-        } else {
-          alert("Invalid credentials. Please try again.");
+          // Sign in with Firebase Auth
+          const userCredential = await auth.signInWithEmailAndPassword(
+            email,
+            password
+          );
+          currentUser = userCredential.user;
+
+          // Get user data from database
+          const userSnapshot = await database
+            .ref("users/" + currentUser.uid)
+            .once("value");
+          const userData = userSnapshot.val();
+
+          if (userData) {
+            currentUser = {
+              ...currentUser,
+              ...userData,
+            };
+            initializeForum();
+          } else {
+            showNotification("User data not found. Please sign up again.");
+            await auth.signOut();
+          }
+        } catch (error) {
+          console.error("Login error:", error);
+          showNotification(error.message);
+        } finally {
+          loginBtn.textContent = "Login";
+          loginBtn.disabled = false;
         }
       });
 
       // Signup form submission
-      signupForm.addEventListener("submit", (e) => {
+      signupForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const name = document.getElementById("signup-name").value;
         const email = document.getElementById("signup-email").value;
         const password = document.getElementById("signup-password").value;
         const role = document.getElementById("signup-role").value;
 
-        // In a real app, you would send this data to a server
-        const newUser = {
-          id: users.length + 1,
-          name,
-          email,
-          role,
-          online: true,
-          avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(
-            name
-          )}`,
-        };
+        if (password.length < 6) {
+          showNotification("Password must be at least 6 characters");
+          return;
+        }
 
-        users.push(newUser);
-        currentUser = newUser;
-        initializeForum();
+        try {
+          // Show loading state
+          signupBtn.innerHTML = '<span class="spinner"></span> Signing up...';
+          signupBtn.disabled = true;
+
+          // Create user with Firebase Auth
+          const userCredential = await auth.createUserWithEmailAndPassword(
+            email,
+            password
+          );
+          currentUser = userCredential.user;
+
+          // Create user data in database
+          const userData = {
+            name,
+            email,
+            role,
+            avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(
+              name
+            )}`,
+            online: true,
+            lastSeen: firebase.database.ServerValue.TIMESTAMP,
+          };
+
+          await database.ref("users/" + currentUser.uid).set(userData);
+
+          currentUser = {
+            ...currentUser,
+            ...userData,
+          };
+
+          initializeForum();
+        } catch (error) {
+          console.error("Signup error:", error);
+          showNotification(error.message);
+        } finally {
+          signupBtn.textContent = "Sign Up";
+          signupBtn.disabled = false;
+        }
       });
 
       // Logout
-      logoutBtn.addEventListener("click", () => {
-        currentUser.online = false;
-        currentUser = null;
-        forumContainer.style.display = "none";
-        loginContainer.style.display = "flex";
-        // Reset forms
-        loginForm.reset();
-        signupForm.reset();
+      logoutBtn.addEventListener("click", async () => {
+        try {
+          if (currentUserRef) {
+            await currentUserRef.update({
+              online: false,
+              lastSeen: firebase.database.ServerValue.TIMESTAMP,
+            });
+          }
+
+          await auth.signOut();
+          currentUser = null;
+
+          // Clean up Firebase listeners
+          if (usersRef) usersRef.off();
+          if (studentMessagesRef) studentMessagesRef.off();
+          if (excoMessagesRef) excoMessagesRef.off();
+
+          forumContainer.style.display = "none";
+          loginContainer.style.display = "flex";
+          loginForm.reset();
+          signupForm.reset();
+        } catch (error) {
+          console.error("Logout error:", error);
+          showNotification(error.message);
+        }
       });
 
       // Initialize the forum after login/signup
@@ -753,12 +841,24 @@
         signupContainer.style.display = "none";
         forumContainer.style.display = "block";
 
+        // Set up Firebase references
+        currentUserRef = database.ref("users/" + currentUser.uid);
+        usersRef = database.ref("users");
+        studentMessagesRef = database.ref("messages/student");
+        excoMessagesRef = database.ref("messages/exco");
+
         // Set user online status
-        currentUser.online = true;
+        currentUserRef.update({
+          online: true,
+          lastSeen: firebase.database.ServerValue.TIMESTAMP,
+        });
+
+        // Set up presence system
+        setupPresence();
 
         // Load users and messages
-        renderUserList();
-        renderMessages();
+        setupUsersListener();
+        setupMessagesListeners();
 
         // Set up the correct chat room based on user role
         if (currentUser.role === "student") {
@@ -768,98 +868,144 @@
         }
       }
 
+      // Set up presence system
+      function setupPresence() {
+        // Update user's online status when they disconnect
+        const userStatusDatabaseRef = database.ref(".info/connected");
+
+        userStatusDatabaseRef.on("value", (snapshot) => {
+          if (snapshot.val() === false) {
+            return;
+          }
+
+          currentUserRef.onDisconnect().update({
+            online: false,
+            lastSeen: firebase.database.ServerValue.TIMESTAMP,
+          });
+        });
+      }
+
+      // Set up users listener
+      function setupUsersListener() {
+        usersRef.on("value", (snapshot) => {
+          const allUsers = snapshot.val() || {};
+          renderUserList(allUsers);
+        });
+      }
+
+      // Set up messages listeners
+      function setupMessagesListeners() {
+        // Student messages
+        studentMessagesRef.limitToLast(100).on("child_added", (snapshot) => {
+          const message = snapshot.val();
+          renderMessage("student", message, snapshot.key);
+        });
+
+        // Exco messages
+        if (currentUser.role === "exco") {
+          excoMessagesRef.limitToLast(100).on("child_added", (snapshot) => {
+            const message = snapshot.val();
+            renderMessage("exco", message, snapshot.key);
+          });
+        }
+      }
+
       // Render user list
-      function renderUserList() {
+      function renderUserList(allUsers) {
         userList.innerHTML = "";
 
-        const filteredUsers = users.filter((user) =>
-          currentUser.role === "student"
-            ? user.role === "student"
-            : user.role === "exco"
-        );
+        // Filter users based on current user's role
+        const filteredUsers = Object.entries(allUsers)
+          .filter(([uid, user]) =>
+            currentUser.role === "student"
+              ? user.role === "student" && uid !== currentUser.uid
+              : user.role === "exco" && uid !== currentUser.uid
+          )
+          .map(([uid, user]) => ({ uid, ...user }));
+
+        if (filteredUsers.length === 0) {
+          const noUsersItem = document.createElement("li");
+          noUsersItem.textContent =
+            currentUser.role === "student"
+              ? "No other students online"
+              : "No other exco members online";
+          userList.appendChild(noUsersItem);
+          return;
+        }
 
         filteredUsers.forEach((user) => {
           const userItem = document.createElement("li");
           userItem.className = "user-item";
           userItem.innerHTML = `
-                    <img src="${user.avatar}" alt="${user.name}">
-                    <span>${user.name}</span>
-                    <div class="status ${
-                      user.online ? "online" : "offline"
-                    }"></div>
-                `;
+            <img src="${user.avatar}" alt="${user.name}">
+            <span>${user.name}</span>
+            <div class="status ${user.online ? "online" : "offline"}"></div>
+          `;
           userList.appendChild(userItem);
         });
       }
 
-      // Render messages
-      function renderMessages() {
-        studentMessages.innerHTML = "";
-        excoMessages.innerHTML = "";
+      // Render a single message
+      function renderMessage(room, message, messageId) {
+        const messagesContainer =
+          room === "student" ? studentMessages : excoMessages;
+        const isCurrentUser = message.userId === currentUser.uid;
 
-        // Render student messages
-        messages.student.forEach((msg) => {
-          const user = users.find((u) => u.id === msg.userId);
-          const isCurrentUser = currentUser.id === msg.userId;
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `message ${isCurrentUser ? "sent" : "received"}`;
+        messageDiv.dataset.id = messageId;
 
-          const messageDiv = document.createElement("div");
-          messageDiv.className = `message ${
-            isCurrentUser ? "sent" : "received"
-          }`;
-          messageDiv.innerHTML = `
-                    <div class="message-info">
-                        <img src="${user.avatar}" alt="${user.name}">
-                        <span>${user.name}</span>
-                    </div>
-                    <div class="message-text">${msg.text}</div>
-                    <div class="message-time">${msg.time}</div>
-                `;
-          studentMessages.appendChild(messageDiv);
-        });
+        // Format timestamp
+        let timestamp = "Just now";
+        if (message.timestamp) {
+          const date = new Date(message.timestamp);
+          timestamp = date.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+        }
 
-        // Render exco messages
-        messages.exco.forEach((msg) => {
-          const user = users.find((u) => u.id === msg.userId);
-          const isCurrentUser = currentUser.id === msg.userId;
+        messageDiv.innerHTML = `
+          <div class="message-info">
+            <img src="${
+              message.avatar || "https://ui-avatars.com/api/?name=User"
+            }" alt="${message.name}">
+            <span>${message.name}</span>
+          </div>
+          <div class="message-text">${message.text}</div>
+          <div class="message-time">${timestamp}</div>
+        `;
 
-          const messageDiv = document.createElement("div");
-          messageDiv.className = `message ${
-            isCurrentUser ? "sent" : "received"
-          }`;
-          messageDiv.innerHTML = `
-                    <div class="message-info">
-                        <img src="${user.avatar}" alt="${user.name}">
-                        <span>${user.name}</span>
-                    </div>
-                    <div class="message-text">${msg.text}</div>
-                    <div class="message-time">${msg.time}</div>
-                `;
-          excoMessages.appendChild(messageDiv);
-        });
-
-        // Scroll to bottom of messages
-        studentMessages.scrollTop = studentMessages.scrollHeight;
-        excoMessages.scrollTop = excoMessages.scrollHeight;
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
       }
 
       // Send message
-      function sendMessage(room, messageInput) {
+      async function sendMessage(room, messageInput) {
         const text = messageInput.value.trim();
         if (text === "") return;
 
-        const newMessage = {
-          id: messages[room].length + 1,
-          userId: currentUser.id,
-          text,
-          time: new Date().toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
-        };
+        try {
+          // Create message object
+          const message = {
+            userId: currentUser.uid,
+            name: currentUser.name,
+            avatar: currentUser.avatar,
+            text,
+            timestamp: firebase.database.ServerValue.TIMESTAMP,
+          };
 
-        messages[room].push(newMessage);
-        renderMessages();
-        messageInput.value = "";
+          // Add message to database
+          const messagesRef =
+            room === "student" ? studentMessagesRef : excoMessagesRef;
+          await messagesRef.push(message);
+
+          // Clear input
+          messageInput.value = "";
+        } catch (error) {
+          console.error("Error sending message:", error);
+          showNotification("Failed to send message");
+        }
       }
 
       // Student message send
@@ -875,11 +1021,15 @@
 
       // Exco message send
       excoSendBtn.addEventListener("click", () => {
-        sendMessage("exco", excoMessageInput);
+        if (currentUser.role === "exco") {
+          sendMessage("exco", excoMessageInput);
+        } else {
+          showNotification("You don't have access to the Exco chat");
+        }
       });
 
       excoMessageInput.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
+        if (e.key === "Enter" && currentUser.role === "exco") {
           sendMessage("exco", excoMessageInput);
         }
       });
@@ -903,7 +1053,9 @@
         if (currentUser.role === "student") {
           showStudentChat();
         } else {
-          alert("You don't have access to the student chat as an Exco member.");
+          showNotification(
+            "You don't have access to the student chat as an Exco member."
+          );
         }
       });
 
@@ -911,14 +1063,38 @@
         if (currentUser.role === "exco") {
           showExcoChat();
         } else {
-          alert("You don't have access to the Exco chat as a student.");
+          showNotification(
+            "You don't have access to the Exco chat as a student."
+          );
         }
       });
 
-      // Initial setup
-      if (currentUser) {
-        initializeForum();
-      }
+      // Check auth state on page load
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          // User is signed in
+          database
+            .ref("users/" + user.uid)
+            .once("value")
+            .then((snapshot) => {
+              const userData = snapshot.val();
+              if (userData) {
+                currentUser = {
+                  ...user,
+                  ...userData,
+                };
+                initializeForum();
+              } else {
+                // User data doesn't exist (legacy account)
+                auth.signOut();
+              }
+            });
+        } else {
+          // User is signed out
+          forumContainer.style.display = "none";
+          loginContainer.style.display = "flex";
+        }
+      });
     </script>
   </body>
 </html>
