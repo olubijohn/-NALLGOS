@@ -4,10 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NALLGOS</title>
-    <!-- Firebase App (core Firebase SDK) -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <!-- Firebase Auth -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <style>
       /* Global Styles */
       :root {
@@ -16,7 +12,6 @@
         --light-color: #f8f9fa;
         --dark-color: #343a40;
         --success-color: #28a745;
-        --error-color: #dc3545;
       }
 
       * {
@@ -71,17 +66,6 @@
         background: #e67e22;
       }
 
-      .btn-outline {
-        background: transparent;
-        border: 2px solid var(--primary-color);
-        color: var(--primary-color);
-      }
-
-      .btn-outline:hover {
-        background: var(--primary-color);
-        color: #fff;
-      }
-
       /* Header */
       header {
         background: var(--primary-color);
@@ -115,7 +99,6 @@
 
       nav ul {
         display: flex;
-        align-items: center;
       }
 
       nav ul li {
@@ -138,229 +121,32 @@
         cursor: pointer;
       }
 
-      /* Auth buttons */
-      .auth-buttons {
-        display: flex;
-        gap: 10px;
-      }
-
-      /* Auth Modals */
-      .auth-modal {
-        display: none;
-        position: fixed;
-        z-index: 2000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.7);
-      }
-
-      .auth-modal-content {
-        background-color: #fefefe;
-        margin: 5% auto;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        width: 90%;
-        max-width: 500px;
-        animation: modalopen 0.4s;
-        position: relative;
-      }
-
-      .close-auth {
-        color: #aaa;
-        position: absolute;
-        top: 15px;
-        right: 20px;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-      .close-auth:hover {
-        color: var(--dark-color);
-      }
-
-      .auth-tabs {
-        display: flex;
-        margin-bottom: 20px;
-        border-bottom: 1px solid #ddd;
-      }
-
-      .auth-tab {
-        padding: 10px 20px;
-        cursor: pointer;
-        background: none;
-        border: none;
-        font-size: 1.1rem;
-        font-weight: 500;
-        color: #777;
-        transition: all 0.3s ease;
-      }
-
-      .auth-tab.active {
-        color: var(--primary-color);
-        border-bottom: 3px solid var(--primary-color);
-      }
-
-      .auth-form {
-        display: none;
-      }
-
-      .auth-form.active {
-        display: block;
-      }
-
-      .form-group {
-        margin-bottom: 20px;
-      }
-
-      .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: 500;
-      }
-
-      .form-group input {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 1rem;
-      }
-
-      .form-group input:focus {
-        border-color: var(--primary-color);
-        outline: none;
-        box-shadow: 0 0 0 2px rgba(26, 82, 118, 0.2);
-      }
-
-      .auth-submit {
-        width: 100%;
-        padding: 12px;
-        background: var(--primary-color);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 1rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: background 0.3s ease;
-      }
-
-      .auth-submit:hover {
-        background: #154360;
-      }
-
-      .auth-switch {
-        text-align: center;
-        margin-top: 20px;
-        font-size: 0.9rem;
-      }
-
-      .auth-switch a {
-        color: var(--primary-color);
-        cursor: pointer;
-        text-decoration: underline;
-      }
-
-      .auth-error {
-        color: var(--error-color);
-        margin-top: 10px;
-        font-size: 0.9rem;
-        text-align: center;
-        display: none;
-      }
-
-      .auth-success {
-        color: var(--success-color);
-        margin-top: 10px;
-        font-size: 0.9rem;
-        text-align: center;
-        display: none;
-      }
-
-      .user-menu {
-        position: relative;
-        display: inline-block;
-      }
-
-      .user-greeting {
-        color: white;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .user-dropdown {
-        display: none;
-        position: absolute;
-        right: 0;
-        top: 100%;
-        background-color: white;
-        min-width: 160px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        z-index: 1;
-        border-radius: 4px;
-        overflow: hidden;
-      }
-
-      .user-dropdown a {
-        color: var(--dark-color);
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        transition: background 0.3s ease;
-      }
-
-      .user-dropdown a:hover {
-        background-color: #f5f5f5;
-      }
-
-      .user-menu:hover .user-dropdown {
-        display: block;
-      }
-
       /* Hero Section */
       .hero {
-        position: relative;
-        height: 100vh;
-        width: 100%;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("Lavun-hero.jpg");
         background-size: cover;
         background-position: center;
-        background-repeat: no-repeat;
-        color: white;
+        height: 80vh;
         display: flex;
         align-items: center;
-        justify-content: center;
         text-align: center;
-        background-color: rgba(0, 0, 0, 0.5);
-        background-blend-mode: overlay;
+        color: #fff;
       }
 
       .hero-content {
-        position: relative;
-        z-index: 2;
-        padding: 20px;
-        max-width: 1200px;
+        max-width: 800px;
         margin: 0 auto;
       }
 
       .hero h1 {
         font-size: 3rem;
-        margin-bottom: 1rem;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        margin-bottom: 20px;
       }
 
-      .hero-buttons {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        margin-top: 30px;
-        flex-wrap: wrap;
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
       }
 
       /* Sections */
@@ -805,15 +591,6 @@
         .section-title h2 {
           font-size: 2rem;
         }
-
-        .auth-buttons {
-          flex-direction: column;
-          gap: 5px;
-        }
-
-        .user-greeting span {
-          display: none;
-        }
       }
 
       @media (max-width: 576px) {
@@ -826,12 +603,6 @@
         }
 
         .modal-content {
-          width: 95%;
-        }
-
-        .auth-modal-content {
-          margin: 10% auto;
-          padding: 20px;
           width: 95%;
         }
       }
@@ -870,64 +641,10 @@
                 <button type="submit"><i class="fas fa-search"></i></button>
               </form>
             </li>
-            <!-- Auth buttons will be inserted here by JavaScript -->
           </ul>
         </nav>
       </div>
     </header>
-
-    <!-- Auth Modals -->
-    <div id="auth-modal" class="auth-modal">
-      <div class="auth-modal-content">
-        <span class="close-auth">&times;</span>
-        <div class="auth-tabs">
-          <button class="auth-tab active" data-tab="login">Login</button>
-          <button class="auth-tab" data-tab="signup">Sign Up</button>
-        </div>
-
-        <form id="login-form" class="auth-form active">
-          <div class="form-group">
-            <label for="login-email">Email</label>
-            <input type="email" id="login-email" required />
-          </div>
-          <div class="form-group">
-            <label for="login-password">Password</label>
-            <input type="password" id="login-password" required />
-          </div>
-          <button type="submit" class="auth-submit">Login</button>
-          <div id="login-error" class="auth-error"></div>
-          <div id="login-success" class="auth-success"></div>
-          <div class="auth-switch">
-            Don't have an account? <a id="switch-to-signup">Sign up</a>
-          </div>
-        </form>
-
-        <form id="signup-form" class="auth-form">
-          <div class="form-group">
-            <label for="signup-name">Full Name</label>
-            <input type="text" id="signup-name" required />
-          </div>
-          <div class="form-group">
-            <label for="signup-email">Email</label>
-            <input type="email" id="signup-email" required />
-          </div>
-          <div class="form-group">
-            <label for="signup-password">Password</label>
-            <input type="password" id="signup-password" required />
-          </div>
-          <div class="form-group">
-            <label for="signup-confirm-password">Confirm Password</label>
-            <input type="password" id="signup-confirm-password" required />
-          </div>
-          <button type="submit" class="auth-submit">Sign Up</button>
-          <div id="signup-error" class="auth-error"></div>
-          <div id="signup-success" class="auth-success"></div>
-          <div class="auth-switch">
-            Already have an account? <a id="switch-to-login">Login</a>
-          </div>
-        </form>
-      </div>
-    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home" style="background-image: url('HERO.jpg')">
@@ -942,6 +659,92 @@
         </div>
       </div>
     </section>
+
+    <style>
+      .hero {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.5
+        ); /* Fallback if image doesn't load */
+        background-blend-mode: overlay;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 30px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        background-color: #1a5276;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .btn:hover {
+        background-color: #154360;
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background-color: #d4ac0d;
+      }
+
+      .btn-secondary:hover {
+        background-color: #b7950b;
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .btn {
+          width: 100%;
+          max-width: 250px;
+          margin: 0 auto;
+        }
+      }
+    </style>
 
     <!-- Structures Section -->
     <section class="section" id="structures">
@@ -2027,7 +1830,7 @@ CHAIRMAN DISABLE PEOPLE, LAVUN</p>
             livelihood in those areas.
           </p>
           <p>
-            8. <strong>TRANSPARENCY & PROGRESS MONitoring</strong><br />
+            8. <strong>TRANSPARENCY & PROGRESS MONITORING</strong><br />
             To keep the public informed through timely updates on development
             and activities within the local government.
           </p>
@@ -2113,280 +1916,10 @@ CHAIRMAN DISABLE PEOPLE, LAVUN</p>
 
     <!-- Database Structure (Conceptual) -->
     <script>
-      // Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyCwNA1NJjAtMvIxYuwQGWmoie119JNfDnk",
-        authDomain: "nallgos.firebaseapp.com",
-        projectId: "nallgos",
-        storageBucket: "nallgos.firebasestorage.app",
-        messagingSenderId: "255585792721",
-        appId: "1:255585792721:web:251a98f4328059541b8bf0",
-        measurementId: "G-HTTPXDPZ23"
-      };
+      // This would be connected to a real database in production
+      // Below is just a conceptual representation
 
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      const auth = firebase.auth();
-
-      // DOM Elements
-      const authModal = document.getElementById('auth-modal');
-      const loginForm = document.getElementById('login-form');
-      const signupForm = document.getElementById('signup-form');
-      const loginError = document.getElementById('login-error');
-      const signupError = document.getElementById('signup-error');
-      const loginSuccess = document.getElementById('login-success');
-      const signupSuccess = document.getElementById('signup-success');
-      const authTabs = document.querySelectorAll('.auth-tab');
-      const authForms = document.querySelectorAll('.auth-form');
-      const closeAuthBtn = document.querySelector('.close-auth');
-      const switchToSignup = document.getElementById('switch-to-signup');
-      const switchToLogin = document.getElementById('switch-to-login');
-      const navMenu = document.getElementById('nav-menu');
-
-      // Auth state management
-      let currentUser = null;
-
-      // Check auth state
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          currentUser = user;
-          updateUIForAuth(user);
-        } else {
-          currentUser = null;
-          updateUIForUnauth();
-        }
-      });
-
-      // Update UI for authenticated user
-      function updateUIForAuth(user) {
-        // Remove any existing auth buttons
-        const existingAuthButtons = document.querySelector('.auth-buttons');
-        const existingUserMenu = document.querySelector('.user-menu');
-        
-        if (existingAuthButtons) {
-          existingAuthButtons.remove();
-        }
-        
-        if (existingUserMenu) {
-          existingUserMenu.remove();
-        }
-
-        // Create user menu
-        const userMenu = document.createElement('li');
-        userMenu.className = 'user-menu';
-        userMenu.innerHTML = `
-          <div class="user-greeting">
-            <span>Hi, ${user.displayName || user.email}</span>
-            <i class="fas fa-user-circle"></i>
-          </div>
-          <div class="user-dropdown">
-            <a href="#" id="profile-link">Profile</a>
-            <a href="#" id="logout-link">Logout</a>
-          </div>
-        `;
-        
-        // Insert user menu before search item
-        const searchItem = document.querySelector('.search-item');
-        navMenu.insertBefore(userMenu, searchItem);
-        
-        // Add logout event
-        document.getElementById('logout-link').addEventListener('click', (e) => {
-          e.preventDefault();
-          auth.signOut();
-        });
-      }
-
-      // Update UI for unauthenticated user
-      function updateUIForUnauth() {
-        // Remove any existing user menu
-        const existingUserMenu = document.querySelector('.user-menu');
-        if (existingUserMenu) {
-          existingUserMenu.remove();
-        }
-
-        // Create auth buttons
-        const authButtons = document.createElement('li');
-        authButtons.className = 'auth-buttons';
-        authButtons.innerHTML = `
-          <a href="#" class="btn btn-outline" id="login-btn">Login</a>
-          <a href="#" class="btn btn-secondary" id="signup-btn">Sign Up</a>
-        `;
-        
-        // Insert auth buttons before search item
-        const searchItem = document.querySelector('.search-item');
-        navMenu.insertBefore(authButtons, searchItem);
-        
-        // Add event listeners to buttons
-        document.getElementById('login-btn').addEventListener('click', (e) => {
-          e.preventDefault();
-          openAuthModal('login');
-        });
-        
-        document.getElementById('signup-btn').addEventListener('click', (e) => {
-          e.preventDefault();
-          openAuthModal('signup');
-        });
-      }
-
-      // Open auth modal
-      function openAuthModal(tab) {
-        authModal.style.display = 'block';
-        switchTab(tab);
-      }
-
-      // Close auth modal
-      function closeAuthModal() {
-        authModal.style.display = 'none';
-        clearAuthMessages();
-        clearAuthForms();
-      }
-
-      // Switch between login and signup tabs
-      function switchTab(tabName) {
-        authTabs.forEach(tab => {
-          if (tab.dataset.tab === tabName) {
-            tab.classList.add('active');
-          } else {
-            tab.classList.remove('active');
-          }
-        });
-        
-        authForms.forEach(form => {
-          if (form.id === `${tabName}-form`) {
-            form.classList.add('active');
-          } else {
-            form.classList.remove('active');
-          }
-        });
-        
-        clearAuthMessages();
-      }
-
-      // Clear auth messages
-      function clearAuthMessages() {
-        loginError.style.display = 'none';
-        signupError.style.display = 'none';
-        loginSuccess.style.display = 'none';
-        signupSuccess.style.display = 'none';
-        loginError.textContent = '';
-        signupError.textContent = '';
-        loginSuccess.textContent = '';
-        signupSuccess.textContent = '';
-      }
-
-      // Clear auth forms
-      function clearAuthForms() {
-        loginForm.reset();
-        signupForm.reset();
-      }
-
-      // Show auth error
-      function showError(formType, message) {
-        const errorElement = formType === 'login' ? loginError : signupError;
-        errorElement.textContent = message;
-        errorElement.style.display = 'block';
-        
-        // Hide after 5 seconds
-        setTimeout(() => {
-          errorElement.style.display = 'none';
-        }, 5000);
-      }
-
-      // Show auth success
-      function showSuccess(formType, message) {
-        const successElement = formType === 'login' ? loginSuccess : signupSuccess;
-        successElement.textContent = message;
-        successElement.style.display = 'block';
-        
-        // Hide after 3 seconds
-        setTimeout(() => {
-          successElement.style.display = 'none';
-        }, 3000);
-      }
-
-      // Handle login
-      loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-        
-        auth.signInWithEmailAndPassword(email, password)
-          .then((userCredential) => {
-            showSuccess('login', 'Login successful!');
-            setTimeout(() => {
-              closeAuthModal();
-            }, 1000);
-          })
-          .catch((error) => {
-            showError('login', error.message);
-          });
-      });
-
-      // Handle signup
-      signupForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const name = document.getElementById('signup-name').value;
-        const email = document.getElementById('signup-email').value;
-        const password = document.getElementById('signup-password').value;
-        const confirmPassword = document.getElementById('signup-confirm-password').value;
-        
-        // Validate passwords match
-        if (password !== confirmPassword) {
-          showError('signup', 'Passwords do not match');
-          return;
-        }
-        
-        // Create user
-        auth.createUserWithEmailAndPassword(email, password)
-          .then((userCredential) => {
-            // Update user profile with name
-            return userCredential.user.updateProfile({
-              displayName: name
-            });
-          })
-          .then(() => {
-            showSuccess('signup', 'Account created successfully!');
-            setTimeout(() => {
-              closeAuthModal();
-            }, 1000);
-          })
-          .catch((error) => {
-            showError('signup', error.message);
-          });
-      });
-
-      // Event listeners
-      authTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          switchTab(tab.dataset.tab);
-        });
-      });
-
-      closeAuthBtn.addEventListener('click', closeAuthModal);
-      
-      switchToSignup.addEventListener('click', (e) => {
-        e.preventDefault();
-        switchTab('signup');
-      });
-      
-      switchToLogin.addEventListener('click', (e) => {
-        e.preventDefault();
-        switchTab('login');
-      });
-
-      window.addEventListener('click', (e) => {
-        if (e.target === authModal) {
-          closeAuthModal();
-        }
-      });
-
-      // Initialize UI based on auth state
-      updateUIForUnauth();
-
-      // Your existing JavaScript code
-      // Database Structure (Conceptual)
+      // Sample database structure
       const lsaDatabase = {
         students: [
           {
