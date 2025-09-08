@@ -3,619 +3,404 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NALLGOS CHAT FORUM</title>
-    <!-- Add Firebase SDKs -->
+    <title>Nallgos Chat Forum</title>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <style>
-      /* Global Styles */
       * {
+        box-sizing: border-box;
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
 
       body {
-        background-color: #f5f5f5;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: #333;
-        transition: all 0.3s ease;
+        line-height: 1.6;
+        padding: 20px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
 
       .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-      /* Auth Pages Styles */
-      .auth-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background: linear-gradient(135deg, #6e8efb, #a777e3);
-      }
-
-      .auth-box {
+        width: 100%;
+        max-width: 900px;
         background: white;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        width: 100%;
-        max-width: 400px;
-        animation: fadeIn 0.5s ease;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
       }
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .auth-title {
+      header {
+        background: #4285f4;
+        color: white;
+        padding: 20px;
         text-align: center;
+      }
+
+      h2 {
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+
+      .content {
+        padding: 25px;
+      }
+
+      .form-container {
         margin-bottom: 20px;
-        color: #444;
       }
 
-      .auth-form .form-group {
+      h3 {
+        font-size: 22px;
         margin-bottom: 15px;
+        color: #4285f4;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
       }
 
-      .auth-form label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: 500;
-      }
-
-      .auth-form input,
-      .auth-form select {
+      input,
+      select {
         width: 100%;
-        padding: 10px;
+        padding: 12px 15px;
+        margin: 8px 0;
         border: 1px solid #ddd;
-        border-radius: 5px;
+        border-radius: 6px;
         font-size: 16px;
+        transition: border 0.3s;
       }
 
-      .auth-form button {
-        width: 100%;
-        padding: 12px;
-        background: linear-gradient(to right, #6e8efb, #a777e3);
+      input:focus,
+      select:focus {
+        border-color: #4285f4;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+      }
+
+      button {
+        background: #4285f4;
         color: white;
         border: none;
-        border-radius: 5px;
-        font-size: 16px;
+        padding: 12px 20px;
+        border-radius: 6px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 10px;
+        transition: all 0.3s;
+        width: 100%;
       }
 
-      .auth-form button:hover {
-        opacity: 0.9;
+      button:hover {
+        background: #3367d6;
         transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
 
-      .auth-switch {
+      button:active {
+        transform: translateY(0);
+      }
+
+      .toggle-text {
         text-align: center;
-        margin-top: 20px;
-        font-size: 14px;
+        margin-top: 15px;
       }
 
-      .auth-switch a {
-        color: #6e8efb;
+      .toggle-text a {
+        color: #4285f4;
         text-decoration: none;
-        font-weight: 500;
+        font-weight: 600;
+        cursor: pointer;
       }
 
-      /* Forum Styles */
-      .forum-container {
+      .toggle-text a:hover {
+        text-decoration: underline;
+      }
+
+      #chat-section {
         display: none;
-        height: 100vh;
-        overflow: hidden;
-        background-color: #f0f2f5;
-      }
-
-      .forum-header {
-        background: linear-gradient(135deg, #6e8efb, #a777e3);
-        color: white;
-        padding: 15px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .forum-header h1 {
-        font-size: 20px;
       }
 
       .user-info {
         display: flex;
+        justify-content: space-between;
         align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #eee;
       }
 
-      .user-info img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-right: 10px;
-        object-fit: cover;
+      .user-details {
+        font-size: 18px;
       }
 
-      .logout-btn {
-        background: rgba(255, 255, 255, 0.2);
-        border: none;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-left: 15px;
-      }
-
-      .forum-main {
+      #rooms {
         display: flex;
-        height: calc(100vh - 70px);
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
       }
 
-      .forum-sidebar {
-        width: 250px;
-        background: white;
-        border-right: 1px solid #ddd;
-        padding: 20px;
-        overflow-y: auto;
+      #rooms button {
+        width: auto;
+        padding: 10px 15px;
       }
 
-      .sidebar-title {
-        font-size: 16px;
-        margin-bottom: 15px;
-        color: #555;
-        font-weight: 600;
+      .room-active {
+        background: #34a853 !important;
       }
 
-      .user-list {
-        list-style: none;
-      }
-
-      .user-item {
-        display: flex;
-        align-items: center;
-        padding: 8px 0;
-        border-bottom: 1px solid #eee;
-        cursor: pointer;
-      }
-
-      .user-item img {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        margin-right: 10px;
-        object-fit: cover;
-      }
-
-      .user-item .status {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        margin-left: auto;
-      }
-
-      .status.online {
-        background-color: #4caf50;
-      }
-
-      .status.offline {
-        background-color: #ccc;
-      }
-
-      .forum-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        overflow: hidden;
-      }
-
-      /* 3D Chat Styles */
-      .chat-3d-container {
-        flex: 1;
-        position: relative;
-        perspective: 1000px;
-        overflow: hidden;
-        background: linear-gradient(135deg, #e0e5ec, #f5f7fa);
-      }
-
-      .chat-room {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        transform-style: preserve-3d;
-        transition: transform 0.5s ease;
-      }
-
-      .chat-wall {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.8);
-        backface-visibility: hidden;
-        display: flex;
-        flex-direction: column;
-        padding: 20px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        transform: translateZ(50px);
-      }
-
-      .chat-wall.front {
-        transform: rotateY(0deg) translateZ(50px);
-      }
-
-      .chat-wall.left {
-        transform: rotateY(-90deg) translateZ(50px);
-      }
-
-      .chat-wall.right {
-        transform: rotateY(90deg) translateZ(50px);
-      }
-
-      .chat-messages {
-        flex: 1;
-        overflow-y: auto;
-        padding: 10px;
-        margin-bottom: 15px;
+      #chat-box {
+        border: 1px solid #ddd;
         border-radius: 8px;
-        background: rgba(255, 255, 255, 0.7);
+        overflow: hidden;
+      }
+
+      #room-title {
+        background: #f8f9fa;
+        padding: 12px 15px;
+        margin: 0;
+        font-size: 18px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      #chat-messages {
+        height: 300px;
+        overflow-y: auto;
+        padding: 15px;
+        background: #fafafa;
       }
 
       .message {
         margin-bottom: 15px;
         padding: 10px 15px;
         border-radius: 18px;
-        max-width: 70%;
-        position: relative;
-        animation: messageIn 0.3s ease;
+        max-width: 80%;
+        word-wrap: break-word;
       }
 
-      @keyframes messageIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .message.sent {
-        background: linear-gradient(135deg, #6e8efb, #a777e3);
-        color: white;
-        margin-left: auto;
-        border-bottom-right-radius: 5px;
-      }
-
-      .message.received {
-        background: #e5e5ea;
-        color: black;
+      .message-incoming {
+        background: #e8f0fe;
+        border-top-left-radius: 4px;
         margin-right: auto;
-        border-bottom-left-radius: 5px;
       }
 
-      .message-info {
-        display: flex;
-        align-items: center;
-        margin-bottom: 5px;
-      }
-
-      .message-info img {
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        margin-right: 8px;
-        object-fit: cover;
-      }
-
-      .message-info span {
-        font-size: 12px;
-        font-weight: 500;
-      }
-
-      .message-time {
-        font-size: 10px;
+      .message-outgoing {
+        background: #34a853;
+        color: white;
+        border-top-right-radius: 4px;
+        margin-left: auto;
         text-align: right;
-        margin-top: 5px;
-        opacity: 0.7;
       }
 
-      .chat-input {
-        display: flex;
-        padding: 10px;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
-      }
-
-      .chat-input input {
-        flex: 1;
-        padding: 10px 15px;
-        border: 1px solid #ddd;
-        border-radius: 20px;
-        outline: none;
+      .message-sender {
+        font-weight: bold;
+        margin-bottom: 5px;
         font-size: 14px;
       }
 
-      .chat-input button {
-        background: linear-gradient(135deg, #6e8efb, #a777e3);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        margin-left: 10px;
-        cursor: pointer;
+      .message-text {
+        margin: 0;
+      }
+
+      .message-time {
+        font-size: 12px;
+        opacity: 0.7;
+        margin-top: 5px;
+      }
+
+      .chat-input-container {
         display: flex;
-        align-items: center;
-        justify-content: center;
+        padding: 15px;
+        background: #f8f9fa;
+        border-top: 1px solid #ddd;
       }
 
-      .room-controls {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        background: white;
-        border-radius: 30px;
-        padding: 5px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        z-index: 10;
+      #chat-input {
+        flex: 1;
+        margin: 0;
+        border-radius: 24px;
+        padding: 12px 20px;
       }
 
-      .room-btn {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: #f5f5f5;
-        border: none;
-        margin: 0 5px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
+      #send-button {
+        width: auto;
+        margin: 0 0 0 10px;
+        border-radius: 24px;
+        padding: 12px 25px;
       }
 
-      .room-btn.active {
-        background: linear-gradient(135deg, #6e8efb, #a777e3);
-        color: white;
-      }
-
-      /* Loading spinner */
-      .spinner {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: 3px solid rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        border-top-color: #fff;
-        animation: spin 1s ease-in-out infinite;
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      /* Notification */
       .notification {
         position: fixed;
         top: 20px;
         right: 20px;
-        background: #ff4444;
+        padding: 15px 20px;
+        border-radius: 8px;
         color: white;
-        padding: 10px 20px;
-        border-radius: 5px;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        font-weight: 600;
         z-index: 1000;
-        display: none;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s;
       }
 
-      /* Responsive Styles */
-      @media (max-width: 768px) {
-        .forum-sidebar {
-          width: 200px;
-        }
-
-        .forum-header h1 {
-          font-size: 18px;
-        }
+      .notification.show {
+        opacity: 1;
+        transform: translateY(0);
       }
 
-      @media (max-width: 576px) {
-        .forum-sidebar {
-          display: none;
+      .notification.error {
+        background: #ea4335;
+      }
+
+      .notification.success {
+        background: #34a853;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+      }
+
+      .firebase-fix {
+        background: #fff8e1;
+        border-left: 4px solid #ffc107;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 4px;
+      }
+
+      .firebase-fix h3 {
+        color: #ff9800;
+        margin-bottom: 10px;
+      }
+
+      .firebase-fix ol {
+        margin-left: 20px;
+        margin-bottom: 15px;
+      }
+
+      .firebase-fix li {
+        margin-bottom: 8px;
+      }
+
+      .firebase-fix code {
+        background: #f5f5f5;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+      }
+
+      @media (max-width: 600px) {
+        body {
+          padding: 10px;
         }
 
-        .auth-box {
-          padding: 20px;
+        .container {
+          border-radius: 8px;
+        }
+
+        header {
+          padding: 15px;
+        }
+
+        h2 {
+          font-size: 24px;
+        }
+
+        .content {
+          padding: 15px;
+        }
+
+        #rooms {
+          flex-direction: column;
+        }
+
+        #rooms button {
+          width: 100%;
+        }
+
+        .chat-input-container {
+          flex-direction: column;
+        }
+
+        #send-button {
+          margin: 10px 0 0 0;
+          width: 100%;
         }
       }
     </style>
   </head>
   <body>
-    <!-- Login Page -->
-    <div class="auth-container" id="login-container">
-      <div class="auth-box">
-        <h2 class="auth-title">Login to Student Forum</h2>
-        <form class="auth-form" id="login-form">
-          <div class="form-group">
-            <label for="login-email">Email</label>
-            <input type="email" id="login-email" required />
-          </div>
-          <div class="form-group">
-            <label for="login-password">Password</label>
-            <input type="password" id="login-password" required />
-          </div>
-          <button type="submit" id="login-btn">Login</button>
-        </form>
-        <div class="auth-switch">
-          Don't have an account? <a href="#" id="show-signup">Sign Up</a>
-        </div>
-      </div>
-    </div>
+    <div class="container">
+      <header>
+        <h2>🔥 Nallgos Chat Forum</h2>
+      </header>
 
-    <!-- Signup Page -->
-    <div class="auth-container" id="signup-container" style="display: none">
-      <div class="auth-box">
-        <h2 class="auth-title">Create an Account</h2>
-        <form class="auth-form" id="signup-form">
-          <div class="form-group">
-            <label for="signup-name">Full Name</label>
-            <input type="text" id="signup-name" required />
-          </div>
-          <div class="form-group">
-            <label for="signup-email">Email</label>
-            <input type="email" id="signup-email" required />
-          </div>
-          <div class="form-group">
-            <label for="signup-password">Password (min 6 characters)</label>
-            <input
-              type="password"
-              id="signup-password"
-              minlength="6"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="signup-role">I am a:</label>
-            <select id="signup-role" required>
-              <option value="">Select Role</option>
+      <div class="content">
+        <!-- AUTH SECTION -->
+        <div id="auth-section">
+          <!-- Signup -->
+          <div id="signup-form" class="form-container">
+            <h3>Create Account</h3>
+            <input id="signup-name" placeholder="Full Name" />
+            <input id="signup-email" type="email" placeholder="Email" />
+            <input id="signup-pass" type="password" placeholder="Password" />
+            <select id="signup-role">
               <option value="student">Student</option>
-              <option value="exco">Exco Member</option>
+              <option value="exco">Exco</option>
+              <option value="admin">Admin</option>
             </select>
+            <button onclick="signup()">Sign Up</button>
+            <div class="toggle-text">
+              Already have an account?
+              <a href="#" onclick="toggleAuth('login')">Login</a>
+            </div>
           </div>
-          <button type="submit" id="signup-btn">Sign Up</button>
-        </form>
-        <div class="auth-switch">
-          Already have an account? <a href="#" id="show-login">Login</a>
-        </div>
-      </div>
-    </div>
 
-    <!-- Forum Page -->
-    <div class="forum-container" id="forum-container">
-      <div class="forum-header">
-        <h1 id="forum-title">Student Forum</h1>
-        <div class="user-info">
-          <img
-            src="https://ui-avatars.com/api/?name=User"
-            alt="User"
-            id="user-avatar"
-          />
-          <span id="user-name">User</span>
-          <button class="logout-btn" id="logout-btn">Logout</button>
-        </div>
-      </div>
-
-      <div class="forum-main">
-        <div class="forum-sidebar">
-          <h3 class="sidebar-title">Online Members</h3>
-          <ul class="user-list" id="user-list">
-            <!-- Users will be added here dynamically -->
-          </ul>
+          <!-- Login -->
+          <div id="login-form" class="form-container" style="display: none">
+            <h3>Login to Your Account</h3>
+            <input id="login-email" type="email" placeholder="Email" />
+            <input id="login-pass" type="password" placeholder="Password" />
+            <button onclick="login()">Login</button>
+            <div class="toggle-text">
+              Don't have an account?
+              <a href="#" onclick="toggleAuth('signup')">Sign Up</a>
+            </div>
+          </div>
         </div>
 
-        <div class="forum-content">
-          <div class="chat-3d-container">
-            <div class="chat-room" id="chat-room">
-              <!-- Student Chat Wall -->
-              <div class="chat-wall front" id="student-chat">
-                <div class="chat-messages" id="student-messages">
-                  <!-- Messages will be added here dynamically -->
-                </div>
-                <div class="chat-input">
-                  <input
-                    type="text"
-                    placeholder="Type your message..."
-                    id="student-message-input"
-                  />
-                  <button id="student-send-btn">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.5.5 0 0 1-.928.086L7.5 12.5l-3.043 3.043a.5.5 0 0 1-.8-.1L.1 10.6a.5.5 0 0 1 .1-.8l3.043-3.043L.646 6.646a.5.5 0 0 1 .086-.928L15.314.036a.5.5 0 0 1 .54.11z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
+        <!-- CHAT SECTION -->
+        <div id="chat-section">
+          <div class="user-info">
+            <div class="user-details">
+              Welcome, <span id="user-name"></span> (<span id="user-role"></span
+              >)
+            </div>
+            <button onclick="logout()">Logout</button>
+          </div>
 
-              <!-- Exco Chat Wall -->
-              <div class="chat-wall left" id="exco-chat">
-                <div class="chat-messages" id="exco-messages">
-                  <!-- Messages will be added here dynamically -->
-                </div>
-                <div class="chat-input">
-                  <input
-                    type="text"
-                    placeholder="Type your message..."
-                    id="exco-message-input"
-                  />
-                  <button id="exco-send-btn">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.5.5 0 0 1-.928.086L7.5 12.5l-3.043 3.043a.5.5 0 0 1-.8-.1L.1 10.6a.5.5 0 0 1 .1-.8l3.043-3.043L.646 6.646a.5.5 0 0 1 .086-.928L15.314.036a.5.5 0 0 1 .54.11z"
-                      />
-                    </svg>
-                  </button>
-                </div>
+          <h3>Choose a Room:</h3>
+          <div id="rooms"></div>
+
+          <div id="chat-box">
+            <h4 id="room-title">Select a room to start chatting</h4>
+            <div id="chat-messages">
+              <div class="loading">
+                Please select a chat room to view messages
               </div>
             </div>
-
-            <div class="room-controls">
-              <button class="room-btn active" id="student-room-btn">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"
-                  />
-                </svg>
-              </button>
-              <button class="room-btn" id="exco-room-btn">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"
-                  />
-                </svg>
+            <div class="chat-input-container">
+              <input id="chat-input" placeholder="Type a message..." disabled />
+              <button id="send-button" onclick="sendMessage()" disabled>
+                Send
               </button>
             </div>
           </div>
@@ -623,478 +408,323 @@
       </div>
     </div>
 
-    <!-- Notification -->
-    <div class="notification" id="notification"></div>
+    <div id="notification" class="notification"></div>
 
     <script>
-      // Firebase configuration - Replace with your actual Firebase config
+      // Firebase Config
       const firebaseConfig = {
-        apiKey: "AIzaSyD8zL8Pvz0v7yJ4X4X4X4X4X4X4X4X4X4X4",
-        authDomain: "nallgos-chat-forum.firebaseapp.com",
-        databaseURL: "https://nallgos-chat-forum-default-rtdb.firebaseio.com",
-        projectId: "nallgos-chat-forum",
-        storageBucket: "nallgos-chat-forum.appspot.com",
-        messagingSenderId: "123456789012",
-        appId: "1:123456789012:web:abcdefghijklmnopqrstuv",
+        apiKey: "AIzaSyCwNA1NJjAtMvIxYuwQGWmoie119JNfDnk",
+        authDomain: "nallgos.firebaseapp.com",
+        databaseURL: "https://nallgos-default-rtdb.firebaseio.com",
+        projectId: "nallgos",
+        storageBucket: "nallgos.appspot.com",
+        messagingSenderId: "255585792721",
+        appId: "1:255585792721:web:251a98f4328059541b8bf0",
+        measurementId: "G-HTTPXDPZ23",
       };
 
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
       const auth = firebase.auth();
-      const database = firebase.database();
+      const db = firebase.database();
 
-      // DOM Elements
-      const loginContainer = document.getElementById("login-container");
-      const signupContainer = document.getElementById("signup-container");
-      const forumContainer = document.getElementById("forum-container");
-      const showSignup = document.getElementById("show-signup");
-      const showLogin = document.getElementById("show-login");
-      const loginForm = document.getElementById("login-form");
-      const signupForm = document.getElementById("signup-form");
-      const loginBtn = document.getElementById("login-btn");
-      const signupBtn = document.getElementById("signup-btn");
-      const logoutBtn = document.getElementById("logout-btn");
-      const userList = document.getElementById("user-list");
-      const studentMessages = document.getElementById("student-messages");
-      const excoMessages = document.getElementById("exco-messages");
-      const studentMessageInput = document.getElementById(
-        "student-message-input"
-      );
-      const excoMessageInput = document.getElementById("exco-message-input");
-      const studentSendBtn = document.getElementById("student-send-btn");
-      const excoSendBtn = document.getElementById("exco-send-btn");
-      const studentRoomBtn = document.getElementById("student-room-btn");
-      const excoRoomBtn = document.getElementById("exco-room-btn");
-      const chatRoom = document.getElementById("chat-room");
-      const userName = document.getElementById("user-name");
-      const userAvatar = document.getElementById("user-avatar");
-      const forumTitle = document.getElementById("forum-title");
-      const notification = document.getElementById("notification");
-
-      // Current user data
+      let currentRoom = null;
       let currentUser = null;
-      let currentUserRef = null;
-      let usersRef = null;
-      let studentMessagesRef = null;
-      let excoMessagesRef = null;
-
-      // Toggle between login and signup forms
-      showSignup.addEventListener("click", (e) => {
-        e.preventDefault();
-        loginContainer.style.display = "none";
-        signupContainer.style.display = "flex";
-      });
-
-      showLogin.addEventListener("click", (e) => {
-        e.preventDefault();
-        signupContainer.style.display = "none";
-        loginContainer.style.display = "flex";
-      });
 
       // Show notification
-      function showNotification(message, isError = true) {
+      function showNotification(message, type) {
+        const notification = document.getElementById("notification");
         notification.textContent = message;
-        notification.style.display = "block";
-        notification.style.background = isError ? "#ff4444" : "#4CAF50";
+        notification.className = `notification ${type}`;
+        notification.classList.add("show");
 
         setTimeout(() => {
-          notification.style.display = "none";
-        }, 3000);
+          notification.classList.remove("show");
+        }, 5000);
       }
 
-      // Login form submission
-      loginForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const email = document.getElementById("login-email").value;
-        const password = document.getElementById("login-password").value;
-
-        try {
-          // Show loading state
-          loginBtn.innerHTML = '<span class="spinner"></span> Logging in...';
-          loginBtn.disabled = true;
-
-          // Sign in with Firebase Auth
-          const userCredential = await auth.signInWithEmailAndPassword(
-            email,
-            password
-          );
-          currentUser = userCredential.user;
-
-          // Get user data from database
-          const userSnapshot = await database
-            .ref("users/" + currentUser.uid)
-            .once("value");
-          const userData = userSnapshot.val();
-
-          if (userData) {
-            currentUser = {
-              ...currentUser,
-              ...userData,
-            };
-            initializeForum();
-          } else {
-            showNotification("User data not found. Please sign up again.");
-            await auth.signOut();
-          }
-        } catch (error) {
-          console.error("Login error:", error);
-          showNotification(error.message);
-        } finally {
-          loginBtn.textContent = "Login";
-          loginBtn.disabled = false;
+      // Toggle between Login/Signup
+      function toggleAuth(mode) {
+        if (mode === "login") {
+          document.getElementById("signup-form").style.display = "none";
+          document.getElementById("login-form").style.display = "block";
+        } else {
+          document.getElementById("signup-form").style.display = "block";
+          document.getElementById("login-form").style.display = "none";
         }
-      });
+      }
 
-      // Signup form submission
-      signupForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
+      // Signup function
+      function signup() {
         const name = document.getElementById("signup-name").value;
         const email = document.getElementById("signup-email").value;
-        const password = document.getElementById("signup-password").value;
+        const pass = document.getElementById("signup-pass").value;
         const role = document.getElementById("signup-role").value;
 
-        if (password.length < 6) {
-          showNotification("Password must be at least 6 characters");
+        if (!name || !email || !pass) {
+          showNotification("Please fill in all fields", "error");
           return;
         }
 
-        try {
-          // Show loading state
-          signupBtn.innerHTML = '<span class="spinner"></span> Signing up...';
-          signupBtn.disabled = true;
+        showNotification("Creating your account...", "success");
 
-          // Create user with Firebase Auth
-          const userCredential = await auth.createUserWithEmailAndPassword(
-            email,
-            password
-          );
-          currentUser = userCredential.user;
+        auth
+          .createUserWithEmailAndPassword(email, pass)
+          .then((cred) => {
+            // Update user profile with display name
+            return cred.user.updateProfile({ displayName: name });
+          })
+          .then(() => {
+            // Get the current user
+            const user = auth.currentUser;
+            if (user) {
+              // Write user data to the database
+              return db.ref("users/" + user.uid).set({
+                name: name,
+                email: email,
+                role: role,
+                createdAt: Date.now(),
+                lastLogin: Date.now(),
+              });
+            }
+          })
+          .then(() => {
+            showNotification("Account created successfully!", "success");
+            // Clear the form
+            document.getElementById("signup-name").value = "";
+            document.getElementById("signup-email").value = "";
+            document.getElementById("signup-pass").value = "";
+          })
+          .catch((error) => {
+            showNotification("Signup error: " + error.message, "error");
+            console.error("Signup error:", error);
+          });
+      }
 
-          // Create user data in database
-          const userData = {
-            name,
-            email,
-            role,
-            avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(
-              name
-            )}`,
-            online: true,
-            lastSeen: firebase.database.ServerValue.TIMESTAMP,
-          };
+      // Login function
+      function login() {
+        const email = document.getElementById("login-email").value;
+        const pass = document.getElementById("login-pass").value;
 
-          await database.ref("users/" + currentUser.uid).set(userData);
-
-          currentUser = {
-            ...currentUser,
-            ...userData,
-          };
-
-          initializeForum();
-        } catch (error) {
-          console.error("Signup error:", error);
-          showNotification(error.message);
-        } finally {
-          signupBtn.textContent = "Sign Up";
-          signupBtn.disabled = false;
+        if (!email || !pass) {
+          showNotification("Please enter both email and password", "error");
+          return;
         }
-      });
 
-      // Logout
-      logoutBtn.addEventListener("click", async () => {
-        try {
-          if (currentUserRef) {
-            await currentUserRef.update({
-              online: false,
-              lastSeen: firebase.database.ServerValue.TIMESTAMP,
+        showNotification("Logging in...", "success");
+
+        auth
+          .signInWithEmailAndPassword(email, pass)
+          .then((userCredential) => {
+            // Update last login time
+            const user = userCredential.user;
+            return db.ref("users/" + user.uid).update({
+              lastLogin: Date.now(),
             });
-          }
-
-          await auth.signOut();
-          currentUser = null;
-
-          // Clean up Firebase listeners
-          if (usersRef) usersRef.off();
-          if (studentMessagesRef) studentMessagesRef.off();
-          if (excoMessagesRef) excoMessagesRef.off();
-
-          forumContainer.style.display = "none";
-          loginContainer.style.display = "flex";
-          loginForm.reset();
-          signupForm.reset();
-        } catch (error) {
-          console.error("Logout error:", error);
-          showNotification(error.message);
-        }
-      });
-
-      // Initialize the forum after login/signup
-      function initializeForum() {
-        // Update UI
-        userName.textContent = currentUser.name;
-        userAvatar.src = currentUser.avatar;
-        forumTitle.textContent = `${
-          currentUser.role === "student" ? "Student" : "Exco"
-        } Forum`;
-
-        // Show forum and hide auth containers
-        loginContainer.style.display = "none";
-        signupContainer.style.display = "none";
-        forumContainer.style.display = "block";
-
-        // Set up Firebase references
-        currentUserRef = database.ref("users/" + currentUser.uid);
-        usersRef = database.ref("users");
-        studentMessagesRef = database.ref("messages/student");
-        excoMessagesRef = database.ref("messages/exco");
-
-        // Set user online status
-        currentUserRef.update({
-          online: true,
-          lastSeen: firebase.database.ServerValue.TIMESTAMP,
-        });
-
-        // Set up presence system
-        setupPresence();
-
-        // Load users and messages
-        setupUsersListener();
-        setupMessagesListeners();
-
-        // Set up the correct chat room based on user role
-        if (currentUser.role === "student") {
-          showStudentChat();
-        } else {
-          showExcoChat();
-        }
-      }
-
-      // Set up presence system
-      function setupPresence() {
-        // Update user's online status when they disconnect
-        const userStatusDatabaseRef = database.ref(".info/connected");
-
-        userStatusDatabaseRef.on("value", (snapshot) => {
-          if (snapshot.val() === false) {
-            return;
-          }
-
-          currentUserRef.onDisconnect().update({
-            online: false,
-            lastSeen: firebase.database.ServerValue.TIMESTAMP,
+          })
+          .catch((error) => {
+            showNotification("Login error: " + error.message, "error");
+            console.error("Login error:", error);
           });
-        });
       }
 
-      // Set up users listener
-      function setupUsersListener() {
-        usersRef.on("value", (snapshot) => {
-          const allUsers = snapshot.val() || {};
-          renderUserList(allUsers);
-        });
-      }
-
-      // Set up messages listeners
-      function setupMessagesListeners() {
-        // Student messages
-        studentMessagesRef.limitToLast(100).on("child_added", (snapshot) => {
-          const message = snapshot.val();
-          renderMessage("student", message, snapshot.key);
-        });
-
-        // Exco messages
-        if (currentUser.role === "exco") {
-          excoMessagesRef.limitToLast(100).on("child_added", (snapshot) => {
-            const message = snapshot.val();
-            renderMessage("exco", message, snapshot.key);
+      // Logout function
+      function logout() {
+        auth
+          .signOut()
+          .then(() => {
+            showNotification("Logged out successfully", "success");
+          })
+          .catch((error) => {
+            showNotification("Logout error: " + error.message, "error");
           });
-        }
       }
 
-      // Render user list
-      function renderUserList(allUsers) {
-        userList.innerHTML = "";
-
-        // Filter users based on current user's role
-        const filteredUsers = Object.entries(allUsers)
-          .filter(([uid, user]) =>
-            currentUser.role === "student"
-              ? user.role === "student" && uid !== currentUser.uid
-              : user.role === "exco" && uid !== currentUser.uid
-          )
-          .map(([uid, user]) => ({ uid, ...user }));
-
-        if (filteredUsers.length === 0) {
-          const noUsersItem = document.createElement("li");
-          noUsersItem.textContent =
-            currentUser.role === "student"
-              ? "No other students online"
-              : "No other exco members online";
-          userList.appendChild(noUsersItem);
-          return;
-        }
-
-        filteredUsers.forEach((user) => {
-          const userItem = document.createElement("li");
-          userItem.className = "user-item";
-          userItem.innerHTML = `
-            <img src="${user.avatar}" alt="${user.name}">
-            <span>${user.name}</span>
-            <div class="status ${user.online ? "online" : "offline"}"></div>
-          `;
-          userList.appendChild(userItem);
-        });
-      }
-
-      // Render a single message
-      function renderMessage(room, message, messageId) {
-        const messagesContainer =
-          room === "student" ? studentMessages : excoMessages;
-        const isCurrentUser = message.userId === currentUser.uid;
-
-        const messageDiv = document.createElement("div");
-        messageDiv.className = `message ${isCurrentUser ? "sent" : "received"}`;
-        messageDiv.dataset.id = messageId;
-
-        // Format timestamp
-        let timestamp = "Just now";
-        if (message.timestamp) {
-          const date = new Date(message.timestamp);
-          timestamp = date.toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          });
-        }
-
-        messageDiv.innerHTML = `
-          <div class="message-info">
-            <img src="${
-              message.avatar || "https://ui-avatars.com/api/?name=User"
-            }" alt="${message.name}">
-            <span>${message.name}</span>
-          </div>
-          <div class="message-text">${message.text}</div>
-          <div class="message-time">${timestamp}</div>
-        `;
-
-        messagesContainer.appendChild(messageDiv);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      }
-
-      // Send message
-      async function sendMessage(room, messageInput) {
-        const text = messageInput.value.trim();
-        if (text === "") return;
-
-        try {
-          // Create message object
-          const message = {
-            userId: currentUser.uid,
-            name: currentUser.name,
-            avatar: currentUser.avatar,
-            text,
-            timestamp: firebase.database.ServerValue.TIMESTAMP,
-          };
-
-          // Add message to database
-          const messagesRef =
-            room === "student" ? studentMessagesRef : excoMessagesRef;
-          await messagesRef.push(message);
-
-          // Clear input
-          messageInput.value = "";
-        } catch (error) {
-          console.error("Error sending message:", error);
-          showNotification("Failed to send message");
-        }
-      }
-
-      // Student message send
-      studentSendBtn.addEventListener("click", () => {
-        sendMessage("student", studentMessageInput);
-      });
-
-      studentMessageInput.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-          sendMessage("student", studentMessageInput);
-        }
-      });
-
-      // Exco message send
-      excoSendBtn.addEventListener("click", () => {
-        if (currentUser.role === "exco") {
-          sendMessage("exco", excoMessageInput);
-        } else {
-          showNotification("You don't have access to the Exco chat");
-        }
-      });
-
-      excoMessageInput.addEventListener("keypress", (e) => {
-        if (e.key === "Enter" && currentUser.role === "exco") {
-          sendMessage("exco", excoMessageInput);
-        }
-      });
-
-      // Switch between chat rooms
-      function showStudentChat() {
-        chatRoom.style.transform = "rotateY(0deg)";
-        studentRoomBtn.classList.add("active");
-        excoRoomBtn.classList.remove("active");
-        studentMessageInput.focus();
-      }
-
-      function showExcoChat() {
-        chatRoom.style.transform = "rotateY(-90deg)";
-        excoRoomBtn.classList.add("active");
-        studentRoomBtn.classList.remove("active");
-        excoMessageInput.focus();
-      }
-
-      studentRoomBtn.addEventListener("click", () => {
-        if (currentUser.role === "student") {
-          showStudentChat();
-        } else {
-          showNotification(
-            "You don't have access to the student chat as an Exco member."
-          );
-        }
-      });
-
-      excoRoomBtn.addEventListener("click", () => {
-        if (currentUser.role === "exco") {
-          showExcoChat();
-        } else {
-          showNotification(
-            "You don't have access to the Exco chat as a student."
-          );
-        }
-      });
-
-      // Check auth state on page load
+      // Auth state change handler
       auth.onAuthStateChanged((user) => {
         if (user) {
           // User is signed in
-          database
-            .ref("users/" + user.uid)
+          db.ref("users/" + user.uid)
             .once("value")
             .then((snapshot) => {
               const userData = snapshot.val();
               if (userData) {
                 currentUser = {
-                  ...user,
-                  ...userData,
+                  uid: user.uid,
+                  name: userData.name,
+                  role: userData.role,
                 };
-                initializeForum();
+
+                // Update UI
+                document.getElementById("user-name").textContent =
+                  currentUser.name;
+                document.getElementById("user-role").textContent =
+                  currentUser.role;
+
+                // Show chat section, hide auth section
+                document.getElementById("auth-section").style.display = "none";
+                document.getElementById("chat-section").style.display = "block";
+
+                // Load available rooms
+                loadRooms();
               } else {
-                // User data doesn't exist (legacy account)
+                showNotification(
+                  "User data not found. Please sign up again.",
+                  "error"
+                );
                 auth.signOut();
               }
+            })
+            .catch((error) => {
+              showNotification(
+                "Error loading user data: " + error.message,
+                "error"
+              );
+              console.error("User data loading error:", error);
+              // Don't log out here as it might be a temporary permission issue
             });
         } else {
           // User is signed out
-          forumContainer.style.display = "none";
-          loginContainer.style.display = "flex";
+          currentUser = null;
+          document.getElementById("auth-section").style.display = "block";
+          document.getElementById("chat-section").style.display = "none";
+
+          // Reset forms
+          document.getElementById("login-email").value = "";
+          document.getElementById("login-pass").value = "";
         }
       });
+
+      // Load rooms based on user role
+      function loadRooms() {
+        const roomsDiv = document.getElementById("rooms");
+        roomsDiv.innerHTML = "";
+
+        if (currentUser.role === "student") {
+          roomsDiv.innerHTML +=
+            "<button onclick=\"showRoom('student')\">Student Room</button>";
+        } else if (currentUser.role === "exco") {
+          roomsDiv.innerHTML +=
+            "<button onclick=\"showRoom('student')\">Student Room</button>";
+          roomsDiv.innerHTML +=
+            "<button onclick=\"showRoom('exco')\">Exco Room</button>";
+        } else if (currentUser.role === "admin") {
+          roomsDiv.innerHTML +=
+            "<button onclick=\"showRoom('student')\">Student Room</button>";
+          roomsDiv.innerHTML +=
+            "<button onclick=\"showRoom('exco')\">Exco Room</button>";
+          roomsDiv.innerHTML +=
+            "<button onclick=\"showRoom('admin')\">Admin Room</button>";
+        }
+      }
+
+      // Show selected room
+      function showRoom(room) {
+        currentRoom = room;
+        document.getElementById("room-title").textContent = "Room: " + room;
+
+        // Enable chat input
+        document.getElementById("chat-input").disabled = false;
+        document.getElementById("send-button").disabled = false;
+
+        // Highlight selected room
+        const buttons = document.querySelectorAll("#rooms button");
+        buttons.forEach((btn) => {
+          if (btn.textContent.toLowerCase().includes(room)) {
+            btn.classList.add("room-active");
+          } else {
+            btn.classList.remove("room-active");
+          }
+        });
+
+        // Clear chat messages
+        const chatMessages = document.getElementById("chat-messages");
+        chatMessages.innerHTML =
+          '<div class="loading">Loading messages...</div>';
+
+        // Remove previous listeners
+        db.ref("rooms/" + room + "/messages").off();
+
+        // Load messages
+        db.ref("rooms/" + room + "/messages")
+          .orderByChild("timestamp")
+          .on("child_added", (snapshot) => {
+            const message = snapshot.val();
+            renderMessage(message);
+          });
+      }
+
+      // Render a message
+      function renderMessage(msg) {
+        const chatMessages = document.getElementById("chat-messages");
+
+        // Remove loading indicator if it exists
+        const loading = chatMessages.querySelector(".loading");
+        if (loading) {
+          loading.remove();
+        }
+
+        const messageDiv = document.createElement("div");
+        messageDiv.className =
+          "message " +
+          (msg.sender === currentUser.name
+            ? "message-outgoing"
+            : "message-incoming");
+
+        const senderDiv = document.createElement("div");
+        senderDiv.className = "message-sender";
+        senderDiv.textContent = msg.sender;
+
+        const textDiv = document.createElement("div");
+        textDiv.className = "message-text";
+        textDiv.textContent = msg.text;
+
+        const timeDiv = document.createElement("div");
+        timeDiv.className = "message-time";
+        timeDiv.textContent = new Date(msg.timestamp).toLocaleTimeString();
+
+        messageDiv.appendChild(senderDiv);
+        messageDiv.appendChild(textDiv);
+        messageDiv.appendChild(timeDiv);
+
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      // Send a message
+      function sendMessage() {
+        const input = document.getElementById("chat-input");
+        const text = input.value.trim();
+
+        if (!text || !currentRoom) return;
+
+        const message = {
+          sender: currentUser.name,
+          text: text,
+          timestamp: Date.now(),
+        };
+
+        db.ref("rooms/" + currentRoom + "/messages")
+          .push(message)
+          .then(() => {
+            input.value = "";
+          })
+          .catch((error) => {
+            showNotification(
+              "Error sending message: " + error.message,
+              "error"
+            );
+          });
+      }
+
+      // Send message on Enter key
+      document
+        .getElementById("chat-input")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            sendMessage();
+          }
+        });
     </script>
   </body>
 </html>
