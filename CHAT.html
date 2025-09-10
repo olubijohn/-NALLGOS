@@ -466,6 +466,15 @@
           return;
         }
 
+        // Check if non-admin email is trying to sign up as admin
+        if (role === "admin" && email !== "kudumahmud@gmail.com") {
+          showNotification(
+            "Only specific email can register as admin",
+            "error"
+          );
+          return;
+        }
+
         showNotification("Creating your account...", "success");
 
         auth
@@ -549,10 +558,24 @@
             .then((snapshot) => {
               const userData = snapshot.val();
               if (userData) {
+                // Check if non-admin email is trying to access admin role
+                if (
+                  userData.role === "admin" &&
+                  userData.email !== "kudumahmud@gmail.com"
+                ) {
+                  showNotification(
+                    "Admin access restricted to specific email only",
+                    "error"
+                  );
+                  auth.signOut();
+                  return;
+                }
+
                 currentUser = {
                   uid: user.uid,
                   name: userData.name,
                   role: userData.role,
+                  email: userData.email,
                 };
 
                 // Update UI
@@ -600,21 +623,34 @@
         const roomsDiv = document.getElementById("rooms");
         roomsDiv.innerHTML = "";
 
-        if (currentUser.role === "student") {
+        // Only allow admin room access for the specific email
+        const isAdmin =
+          currentUser.role === "admin" &&
+          currentUser.email === "kudumahmud@gmail.com";
+        const isExco = currentUser.role === "exco";
+        const isStudent = currentUser.role === "student";
+
+        if (isStudent) {
           roomsDiv.innerHTML +=
             "<button onclick=\"showRoom('student')\">Student Room</button>";
-        } else if (currentUser.role === "exco") {
+        } else if (isExco) {
           roomsDiv.innerHTML +=
             "<button onclick=\"showRoom('student')\">Student Room</button>";
           roomsDiv.innerHTML +=
             "<button onclick=\"showRoom('exco')\">Exco Room</button>";
-        } else if (currentUser.role === "admin") {
+        } else if (isAdmin) {
           roomsDiv.innerHTML +=
             "<button onclick=\"showRoom('student')\">Student Room</button>";
           roomsDiv.innerHTML +=
             "<button onclick=\"showRoom('exco')\">Exco Room</button>";
           roomsDiv.innerHTML +=
             "<button onclick=\"showRoom('admin')\">Admin Room</button>";
+        } else {
+          // For users who somehow have admin role but not the correct email
+          if (currentUser.role === "admin") {
+            showNotification("Admin access restricted", "error");
+            auth.signOut();
+          }
         }
       }
 
